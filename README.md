@@ -1,2 +1,2 @@
 # FCP
- further computer programming courdsework
+ further computer programming coursework
