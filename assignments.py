@@ -7,7 +7,7 @@ Created on Wed Mar 23 13:03:36 2022
 """
 # import names as nm
 with open('names.txt' , 'r') as names:
-        Names = (opt.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
+        Names = (names.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
 
 def halls(StudentNumber):
     if  StudentNumber in range(0,2):
@@ -49,6 +49,12 @@ for Individual in range(1, PopulationSize): # population size should be an inter
     # use that as a variable name and then create a class object with that name
     # then append this object to the population list
 
+StudentsList = [Person (i) for i in range(PopulationSize)]
+
+    #this seems way more promissing
+
+
+
 #class Person:
     
         
@@ -68,35 +74,17 @@ for Individual in range(1, PopulationSize): # population size should be an inter
     #         self.halls = "south" 
     #     else:
     #         return print('error assigning hall')
-    def origin(self, origin):
-        if NumeratedPerson in range(0,2):
-             self.origin = "china"
-        elif NumeratedPerson in range(2,3):
-            self.origin = "usa"
-        elif NumeratedPerson in range(3,7):
-            self.origin = "england"
-        elif NumeratedPerson in range(7,10):
-            self.origin = "mexico" 
-        else:
-            return print('error assigning origin')
+    # def origin(self, origin):
+    #     if NumeratedPerson in range(0,2):
+    #          self.origin = "china"
+    #     elif NumeratedPerson in range(2,3):
+    #         self.origin = "usa"
+    #     elif NumeratedPerson in range(3,7):
+    #         self.origin = "england"
+    #     elif NumeratedPerson in range(7,10):
+    #         self.origin = "mexico" 
+    #     else:
+    #         return print('error assigning origin')
 
 
 
-for NumeratedPerson in (range(1,10)):
-    
-    NumeratedPerson = Person()
-    NumeratedPerson.halls = Person.halls(NumeratedPerson)
-    print(NumeratedPerson.halls)
-    # with open('names.txt', 'r') as NamesFile:  # Ludo to add names attribute to agents 
-       
-        # NumeratedPerson.name = NamesFile.readlines(int(NumeratedPerson)
-                                                   
-           
-    
-     
-    
-    
-
-    
-    
-# print(1.halls)
