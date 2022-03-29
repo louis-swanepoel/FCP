@@ -14,7 +14,7 @@ import random as r
 # creates a list of names in the list names     
 Names = []
         
-with open("names.txt", "r") as NamesTxt:
+with open("initialisation/names.txt", "r") as NamesTxt:
     lines = NamesTxt.read().split('\n')
 for line in lines:
     Names.append(line)    
@@ -73,18 +73,24 @@ while counter <= 1000: # Limits the population size under investigation
             print('Origin assignment error')
             break
         
+        NameInfo['Infection Status'] = 'S'
+        
+        NameInfo['Date of Last Infection'] = False
+        
+        NameInfo['Date of Recovery'] = False
         
         Students[Name] = dict(NameInfo)
 
 
-PopulationIndependentData = pd.DataFrame(Students)
+
+
 
 # PopulationIndependentData.style
 
 # print(PopulationIndependentData)
-
-PopulationIndependentData.to_csv('RawIndependentPopData.csv', index=True)
-PopulationIndependentData.to_excel('RawIndependentPopDataCSV.xlsx', index=True)
+def CreateCSVRawData(Students):
+    PopulationIndependentData = pd.DataFrame(Students)    
+    PopulationIndependentData.to_excel('RawIndependentPopDataCSV.xlsx', index=True)
 
 
 
