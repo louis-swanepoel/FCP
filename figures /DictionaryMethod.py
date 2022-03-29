@@ -7,17 +7,30 @@ Created on Wed Mar 23 13:03:36 2022
 """
 # import names as nm
 import pandas as pd 
-    
+import random as r
+ 
+
+
+# creates a list of names in the list names     
 Names = []
         
 with open("names.txt", "r") as NamesTxt:
     lines = NamesTxt.read().split('\n')
 for line in lines:
-    Names.append(line)
-
+    Names.append(line)    
 # Independent parameters that do not change 
+
 Halls = ['east','west','south','north']
-Origin = ['China', 'England', 'USA', 'Mexico','Australia']
+
+# WeightHalls= [0.35, 0.05, 0.07, 0.5, 0.03]
+
+# HallsList = r.choices(Origins, WeightOrigin, k = 1000)
+Origins = ['China' , 'US' , 'UK' , 'EU']
+
+
+# WeightOrigin = [0.1, 0.04, 0.05, 0.05, 0.5]
+
+# OriginsList = r.choices(Origins, WeightOrigin, k = 1000)
 
 
 Students = {}
@@ -26,13 +39,13 @@ while counter <= 1000: # Limits the population size under investigation
     for Name in Names:
         NameInfo = {}
         counter += 1
-        
+     
         # Code below iterates through each name and for each name it assigns values to the parameter
-        # origin or halls , nore can be added 
-        #
+        # origin or halls , nore can be added    
         
         # halls assingment
-        if counter <= 120:        
+        
+        if 0 < counter <= 120:        
             NameInfo['Hall']= Halls[0]
         elif 120 < counter <= 400:
             NameInfo['Hall']= Halls[1]
@@ -43,17 +56,19 @@ while counter <= 1000: # Limits the population size under investigation
         else:
              print('Halls assignment error') 
              break
+         
          # origin assingment
-        if counter%5 == 0:        
-            NameInfo['Origin'] = Origin[0]
-        elif counter%5 == 1:
-            NameInfo['Origin'] = Origin[1]
-        elif counter%5 == 2:
-            NameInfo['Origin'] = Origin[2]
-        elif counter%5 == 3:
-            NameInfo['Origin'] = Origin[3]
-        elif counter%5 == 4:
-            NameInfo['Origin'] = Origin[4]
+        
+        
+        
+        if counter%4 == 0:        
+            NameInfo['Origin'] = Origins[0]
+        elif counter%4 == 1:
+            NameInfo['Origin'] = Origins[1]
+        elif counter%4 == 2:
+            NameInfo['Origin'] = Origins[2]
+        elif counter%4 == 3:
+            NameInfo['Origin'] = Origins[3]        
         else:
             print('Origin assignment error')
             break
@@ -66,7 +81,11 @@ PopulationIndependentData = pd.DataFrame(Students)
 
 # PopulationIndependentData.style
 
-print(PopulationIndependentData)
+# print(PopulationIndependentData)
 
 PopulationIndependentData.to_csv('RawIndependentPopData.csv', index=True)
 PopulationIndependentData.to_excel('RawIndependentPopDataCSV.xlsx', index=True)
+
+
+
+print(Students['Jessica'])
