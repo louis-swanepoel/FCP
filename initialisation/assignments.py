@@ -7,7 +7,7 @@ Created on Wed Mar 23 13:03:36 2022
 """
 # import names as nm
 #from DictionaryMethod import Halls
-from random import choices
+from random import choices , randint , choice
 
 with open('names.txt' , 'r') as names:
         Names = (names.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
@@ -20,20 +20,27 @@ HallWeight = [0.1 , 0.2 , 0.4 , 0.3]
 Country = ['China' , 'US' , 'UK' , 'EU']
 CountryWeight = [.1 , .1 , .7 , .1]
 
-CountryInfDict = {'China':0.1 , 'UK':0.2 , 'US':0.15 , 'EU':.05} #infection rates of individual nations
+CountryInfDict = {'China':0.1 , 'UK':0.2 , 'US':0.15 , 'EU':.05} #infect % of individual nations
 
-PopulationSize = 10
+PopulationSize = 1000
 Names = Names[:PopulationSize] #trims the names list - idk if necessary
 
 Status = ['I' , 'S' ,'R' ]
 
+Courses = 'STEM' , 'ARTS'
+
 ###Initial Allocations
+def Jokes(subject):
+    if subject == 'STEM':
+        return 0
+    else:
+        return 2   ##Unsure if we carry this into final version
 
 def InfStatus(Nation):
     affected = CountryInfDict[Nation]
-    InfWeight = [affected , 1-affected , 0]
+    InfWeight = [affected , 1-affected , 0] #Currently starts of w/ a recovered rate of 0
     InfList = choices(Status , InfWeight )
-    return InfList[0]  #the zero indices is used to prevent a list of length 1 being returned
+    return InfList[0]  #The zero indices is used to prevent a list of length 1 being returned
 
 class Person:
     def __init__(self, StudentNumber ):
@@ -41,7 +48,19 @@ class Person:
         self.Halls = choices(Halls, HallWeight)[0]
         self.Origin = choices(Country, CountryWeight)[0]
         self.Name = Names[StudentNumber]
-        self.SIR = InfStatus(self.Origin)
+        self.SIR = InfStatus(self.Origin) 
+        self.Course = choice(Courses)
+        self.Social = min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
 
 StudentsList = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
 
+
+### testing - not to be used
+arbitary = 0
+for People in StudentsList:
+    if People.Halls == 'North':
+        arbitary += 1
+print(arbitary)
+print(StudentsList[13].Name)
+for i in range(1,10):
+    print(vars(StudentsList[i]))
