@@ -27,14 +27,23 @@ Names = Names[:PopulationSize] #trims the names list - idk if necessary
 
 Status = ['I' , 'S' ,'R' ]
 
-Courses = 'STEM' , 'ARTS'
+Courses =[ 'STEM' , 'ARTS' ]
+
+ParameterValuesDict = {}
+
+ParameterValuesDict['Halls'] = Halls
+ParameterValuesDict['Origin'] = Country
+ParameterValuesDict['Name'] = Names
+ParameterValuesDict['Course'] = Courses
+
+
 
 ###Initial Allocations
 def Jokes(subject):
     if subject == 'STEM':
         return 0
     else:
-        return 2   ##Unsure if we carry this into final version
+        return 2   ##Unsure if we carry this into final version 
 
 def InfStatus(Nation):
     affected = CountryInfDict[Nation]
@@ -52,15 +61,24 @@ class Person:
         self.Course = choice(Courses)
         self.Social = min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
 
-StudentsList = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
 
+StudentObjects = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
+
+
+
+#dictionary of students information
+# for person in StudentObjects:
+    # StudentsDictvars(StudentObjects[person]))
+# print(StudentsList)
 
 ### testing - not to be used
-arbitary = 0
-for People in StudentsList:
-    if People.Halls == 'North':
-        arbitary += 1
-print(arbitary)
-print(StudentsList[13].Name)
-for i in range(1,10):
-    print(vars(StudentsList[i]))
+
+# arbitary = 0
+# for People in StudentsList:
+#     if People.Halls == 'North':
+#         arbitary += 1
+# print(arbitary)
+# print(StudentsList[13].Name)
+
+    
+    
