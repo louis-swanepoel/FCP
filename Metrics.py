@@ -12,6 +12,7 @@ import assignments as s
 import numpy as np
 import plotly.express as px
 
+#### STAT COLLECTION ####
 
 # Function to create dataframe of students information  -- returns dataframe of all the students attributes 
 def CreateDataFrame():
@@ -75,16 +76,7 @@ def CollectSIRdata():
     todaysProportionI = todaysFrequencyI/s.PopulationSize
     todaysProportionR = todaysFrequencyR/s.PopulationSize
                 
-    ## Creation of a dictionary holding SIR proportion/frequencies 
-    # informationDictSIR = {'S':{"Proportion":todaysProportionS , 'Frequency' : todaysFrequencyS } , 
-    #                       'I':{"Proportion":todaysProportionI , 'Frequency' : todaysFrequencyI } , 
-    #                      'R':{"Proportion":todaysProportionR , 'Frequency' : todaysFrequencyR }  }
-    
-    ## Dataframe of SIR preportions in first row
-    # dailyDataSIR = pd.DataFrame(informationDictSIR)
-    
-    # Creation of a matrix of SIR proportions in total population
-    proportionsSIR = [todaysProportionS,todaysFrequencyI,todaysProportionR]
+    proportionsSIR = [todaysProportionS,todaysProportionI,todaysProportionR]
     
     return proportionsSIR
       
@@ -171,7 +163,7 @@ def DailyDataSIR():
     return  Hallscomparison,(SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
                            
 
-# Returns a dataframe with filters specified in the argument in the order specified (SIRstatus, Origin, Name, Halls, Course) -- Specify as 'None' if you do not want to filter by that value 
+# Returns a dataframe with filters specified in the argument, SIR VALS for given parameters -- Specify as 'None' if you do not want to filter by that value 
 def SIRinfoFilter(SIRstatus, Origin, Name, Halls, Course):
     
     # Reuses CreateDataframe function to produce a data frame of all students data
@@ -180,48 +172,47 @@ def SIRinfoFilter(SIRstatus, Origin, Name, Halls, Course):
     #   Checks to see if each respective attribute to be filtered by was defined when inputting the function 
     if isinstance(SIRstatus,str) == True:    
         
-        # If it was defined then it adds the filtering condition tot the dataframe
+        # If it was defined then it adds the filtering condition to the dataframe
         StudentInfoDataFrameFiltered = StudentInfoDataFrame[(StudentInfoDataFrame['SIR'] == SIRstatus)]   
     else:
         
         # If no infomation was given to filter then it does not filter it by the variable and says so to the user       
-        StudentInfoDataFrameFiltered = StudentInfoDataFrame[~(StudentInfoDataFrame['SIR'] == SIRstatus)] 
-        print('No SIR val Specified')
+        StudentInfoDataFrameFiltered = StudentInfoDataFrame[~(StudentInfoDataFrame['SIR'] == SIRstatus)]         
     
     # These steps are repeated for each attribute that could be filtered by  
     if isinstance(Origin,str) == True:       
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
     else:        
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
-        print('No Origin val Specified') 
     
     if isinstance(Name,str) == True:       
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Name'] == Name) ]
     else:         
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Name'] == Name) ]
-        print('No name val Specified')
     
     if isinstance(Halls,str) == True:
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
     else:         
-        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
-        print('No Halls val Specified')     
-        
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Halls'] == Halls) ]     
+      
     if isinstance(Course,str) == True:
         StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Course'] == Course) ]
     else:        
-        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Course'] == Course) ]
-        print('No Course val Specified') 
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Course'] == Course) ] 
+    
+    # Creates variable SIRvalsForFilter which containes the SIR numbers for the given situation
+    SIRvalsForFilter = StudentInfoDataFrameFiltered['SIR'].value_counts()
     
     # The filtered dataframe is returned
-    return  StudentInfoDataFrameFiltered  
+    return  StudentInfoDataFrameFiltered  , SIRvalsForFilter
 
          
-StudentInfoDataFrameFiltered = SIRinfoFilter(None,None,None,'North',None)
-StudentInfoDataFrameFilteredInfo = StudentInfoDataFrameFiltered.describe()
 
-print(StudentInfoDataFrameFilteredInfo)    
-
+#### GRAPHS #####
+def lineGraph(SIRSeries):
+    
+    InfectionsAgainstTime = px.line(SIRSeries, x='Date', y="I")
+    return InfectionsAgainstTime
 ###### TESTING
 
 
