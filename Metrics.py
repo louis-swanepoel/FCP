@@ -92,11 +92,8 @@ def CollectSIRdata():
 # returns--  Halls comparison, SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where Halls comparison is a dataframe and each after that is a nested list of SIR data objects 
 def DailyDataSIR():
     
-    # Create Lists to collect S, I and R statuses in bins 
-    SlistPop = []
-    IlistPop = []
-    RlistPop = []
-    
+    # Create Lists to collect S, I and R statuses in bins     
+    SIRlistPop = [[],[],[]]
         
     # List of SIR for each halls 
     SIRlistNorth = [[],[],[]]
@@ -109,7 +106,7 @@ def DailyDataSIR():
 
         # Add each students SIR status to the correct bin so now the bins have collected all students
         if s.StudentObjects[StudentNumber].SIR == 'S':
-            SlistPop.append(s.StudentObjects[StudentNumber]) 
+            SIRlistPop[0].append(s.StudentObjects[StudentNumber]) 
             
             # Sorts each person of status S into the first value in a list for each halls
             if s.StudentObjects[StudentNumber].Halls == 'North':
@@ -125,8 +122,8 @@ def DailyDataSIR():
 
         # Sorts each person of status I into the second value in a list for each halls
         elif s.StudentObjects[StudentNumber].SIR == 'I':
-            IlistPop.append(s.StudentObjects[StudentNumber])
-
+            SIRlistPop[1].append(s.StudentObjects[StudentNumber])
+            
             if s.StudentObjects[StudentNumber].Halls == 'North':
                 SIRlistNorth[1].append(s.StudentObjects[StudentNumber])           
             elif s.StudentObjects[StudentNumber].Halls == 'East':
@@ -139,7 +136,7 @@ def DailyDataSIR():
                 ValueError('Student must have an SIR value')
         # Sorts each person of status R into the third value in a list for each halls
         elif s.StudentObjects[StudentNumber].SIR == 'R':
-            RlistPop.append(s.StudentObjects[StudentNumber])
+            SIRlistPop[2].append(s.StudentObjects[StudentNumber])
 
             if s.StudentObjects[StudentNumber].Halls == 'North':
                 SIRlistNorth[2].append(s.StudentObjects[StudentNumber])           
@@ -165,27 +162,65 @@ def DailyDataSIR():
     
     # Append column values in order according to halls for S,I and R and create dictionary to prepare for datafraame creation
     for i in range(3):
-        HallsSIR[Columns[i]] = [len(SIRlistNorth[i]),len(SIRlistEast[i]),len(SIRlistSouth[i]),len(SIRlistWest[i])]
+        HallsSIR[Columns[i]] = [len(SIRlistNorth[i]),len(SIRlistEast[i]),len(SIRlistSouth[i]),len(SIRlistWest[i]),len(SIRlistPop[i])]
+    
     
     # Make Dataframe
-    Hallscomparison = pd.DataFrame(HallsSIR, index=('North', 'East','South', 'West'))
-    
-    ### to create func to find SIR data 
+    Hallscomparison = pd.DataFrame(HallsSIR, index=('North', 'East','South', 'West','Total proportion'))
     
     return  Hallscomparison,(SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
-   
-# SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest                           
+                           
 
-
-
-Hallscomparison  = (DailyDataSIR())[0]
-StudentInfoDataFrame = CreateDataFrame()
-SIRData = CollectSIRdata()
-
-print(SIRData)
-print(Hallscomparison)     
-        
+# Returns a dataframe with filters specified in the argument in the order specified (SIRstatus, Origin, Name, Halls, Course) -- Specify as 'None' if you do not want to filter by that value 
+def SIRinfoFilter(SIRstatus, Origin, Name, Halls, Course):
     
+    # Reuses CreateDataframe function to produce a data frame of all students data
+    StudentInfoDataFrame = CreateDataFrame()
+    
+    #   Checks to see if each respective attribute to be filtered by was defined when inputting the function 
+    if isinstance(SIRstatus,str) == True:    
+        
+        # If it was defined then it adds the filtering condition tot the dataframe
+        StudentInfoDataFrameFiltered = StudentInfoDataFrame[(StudentInfoDataFrame['SIR'] == SIRstatus)]   
+    else:
+        
+        # If no infomation was given to filter then it does not filter it by the variable and says so to the user       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrame[~(StudentInfoDataFrame['SIR'] == SIRstatus)] 
+        print('No SIR val Specified')
+    
+    # These steps are repeated for each attribute that could be filtered by  
+    if isinstance(Origin,str) == True:       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
+    else:        
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
+        print('No Origin val Specified') 
+    
+    if isinstance(Name,str) == True:       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Name'] == Name) ]
+    else:         
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Name'] == Name) ]
+        print('No name val Specified')
+    
+    if isinstance(Halls,str) == True:
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
+    else:         
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
+        print('No Halls val Specified')     
+        
+    if isinstance(Course,str) == True:
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Course'] == Course) ]
+    else:        
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Course'] == Course) ]
+        print('No Course val Specified') 
+    
+    # The filtered dataframe is returned
+    return  StudentInfoDataFrameFiltered  
+
+         
+StudentInfoDataFrameFiltered = SIRinfoFilter(None,None,None,'North',None)
+StudentInfoDataFrameFilteredInfo = StudentInfoDataFrameFiltered.describe()
+
+print(StudentInfoDataFrameFilteredInfo)    
 
 ###### TESTING
 
