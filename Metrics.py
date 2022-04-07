@@ -9,6 +9,8 @@ Created on Wed Mar 23 13:03:36 2022
 import pandas as pd 
 import random as r
 import assignments as s
+import numpy as np
+import plotly.express as px
 
 
 # Function to create dataframe of students information  -- returns dataframe of all the students attributes 
@@ -87,7 +89,7 @@ def CollectSIRdata():
     return proportionsSIR
       
     
-# returns--  SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where each is a nested list of SIR data 
+# returns--  Halls comparison, SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where Halls comparison is a dataframe and each after that is a nested list of SIR data objects 
 def DailyDataSIR():
     
     # Create Lists to collect S, I and R statuses in bins 
@@ -108,7 +110,8 @@ def DailyDataSIR():
         # Add each students SIR status to the correct bin so now the bins have collected all students
         if s.StudentObjects[StudentNumber].SIR == 'S':
             SlistPop.append(s.StudentObjects[StudentNumber]) 
-
+            
+            # Sorts each person of status S into the first value in a list for each halls
             if s.StudentObjects[StudentNumber].Halls == 'North':
                 SIRlistNorth[0].append(s.StudentObjects[StudentNumber])           
             elif s.StudentObjects[StudentNumber].Halls == 'East':
@@ -120,7 +123,7 @@ def DailyDataSIR():
             else:
                 ValueError('Student must have an SIR value')
 
-
+        # Sorts each person of status I into the second value in a list for each halls
         elif s.StudentObjects[StudentNumber].SIR == 'I':
             IlistPop.append(s.StudentObjects[StudentNumber])
 
@@ -134,7 +137,7 @@ def DailyDataSIR():
                 SIRlistSouth[1].append(s.StudentObjects[StudentNumber])
             else:
                 ValueError('Student must have an SIR value')
-
+        # Sorts each person of status R into the third value in a list for each halls
         elif s.StudentObjects[StudentNumber].SIR == 'R':
             RlistPop.append(s.StudentObjects[StudentNumber])
 
@@ -151,17 +154,39 @@ def DailyDataSIR():
 
         else:
             raise ValueError('Student must have an SIR value')
-            
-    return  (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
-   
-                           
-SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest  = DailyDataSIR()
+    
+    ### Similar code to function CreateDataframe to create Halls Comparison
+    
+    # Creation of column headings
+    Columns = ['S','I','R']
 
+    # Create empty dictionary for values of each column for each halls
+    HallsSIR = {}
+    
+    # Append column values in order according to halls for S,I and R and create dictionary to prepare for datafraame creation
+    for i in range(3):
+        HallsSIR[Columns[i]] = [len(SIRlistNorth[i]),len(SIRlistEast[i]),len(SIRlistSouth[i]),len(SIRlistWest[i])]
+    
+    # Make Dataframe
+    Hallscomparison = pd.DataFrame(HallsSIR, index=('North', 'East','South', 'West'))
+    
+    ### to create func to find SIR data 
+    
+    return  Hallscomparison,(SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
+   
+# SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest                           
+
+
+
+Hallscomparison  = (DailyDataSIR())[0]
 StudentInfoDataFrame = CreateDataFrame()
+SIRData = CollectSIRdata()
 
-S = StudentInfoDataFrame['SIR']
-print(S)
-   
+print(SIRData)
+print(Hallscomparison)     
+        
+    
+
 ###### TESTING
 
 

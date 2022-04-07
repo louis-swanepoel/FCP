@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import date as d 
 import assignments as s
 import argparse as ap
-
+import Metrics as m
 
 
 Today = d.today()
@@ -17,16 +17,21 @@ DateArray = pd.date_range('17/09/2021', Today.strftime("%d/%m/%Y"))
 # Produces an array of the date from september until now 
 
 DateCSV = pd.DataFrame(DateArray)
-print(DateCSV)
 
 
 for Day in range(0,len(DateArray)):
-    
-    
+    if Day%
+    for hour in range(24):
+        if hour
+        
     #This is where you will put functions to change the attributes of the people in the class Person
     # Namely the attributes that effect infection status 
     if Day == 7:
+        
+        CollectSIRdata()
         print('day 7')
+        
+        
     if Day == 14:
         
         
