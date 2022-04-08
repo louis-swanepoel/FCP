@@ -34,76 +34,88 @@ for Day in range(0,len(DateRange)):
     # Holidays only add the data and do not change the infection numbers
     if Day in range (30,37):
         
+        SIRvalsToday = m.CollectSIRdata()
+        S.append(SIRvalsToday[0])
+        I.append(SIRvalsToday[1])
+        R.append(SIRvalsToday[2])
+        
         # Collects whatever data you want at the start of the reading week 1
         if Day == 30:
             
             #Calling function SIRinfofilter to find out who was infected in the onrth halls at the start of the reading week 
             ReadingWeek1Data = m.SIRinfoFilter('I', None, None, 'North', None)
         
-        SIRvalsToday = m.CollectSIRdata()
-        S.append(SIRvalsToday[0])
-        I.append(SIRvalsToday[1])
-        R.append(SIRvalsToday[2])
+        
     
         # Christomas hols
-    elif Day in range (70,100):
+    elif Day in range (200,230):
         
-        # Collects whatever data you want at the start of the Christmas holidays
-        if Day == 70:
-            
-            ChristmasData = m.SIRinfoFilter('I', None, None, 'North', None)
-            
         SIRvalsToday = m.CollectSIRdata()
         S.append(SIRvalsToday[0])
         I.append(SIRvalsToday[1])
         R.append(SIRvalsToday[2])
         
-    elif Day in range (110,117):
+        if Day == 230:
+            
+            for StudentNumber in range(s.PopulationSize):
+                # if s.StudentObjects[StudentNumber].Origin == 'EU':                   
+                s.StudentObjects[StudentNumber].SIR == 'I'  
+                s.StudentObjects[StudentNumber].DayInfected = ([DateRange[Day],Day])
+        elif Day == 200:
+            
+            ChristmasData = m.SIRinfoFilter('I', None, None, 'North', None)     
+                       
+
+        # Collects whatever data you want at the start of the Christmas holidays
+        
+            
+    elif Day in range (260,267):
+        
+        SIRvalsToday = m.CollectSIRdata()
+        S.append(SIRvalsToday[0])
+        I.append(SIRvalsToday[1])
+        R.append(SIRvalsToday[2])
         
         # Collects whatever data you want at the start of the reading week 2
         if Day == 110:
             ReadingWeek2Data = m.SIRinfoFilter(None, None, None, None, None)
-            
-        SIRvalsToday = m.CollectSIRdata()
-        S.append(SIRvalsToday[0])
-        I.append(SIRvalsToday[1])
-        R.append(SIRvalsToday[2])
     
     # Week days add normal infecton data            
     elif 0<= Day%7 <=5:
         
-        for StudentNumber in range(s.PopulationSize):
-            f.infected(StudentNumber, Day , DateRange)         
-          
         SIRvalsToday = m.CollectSIRdata()
         S.append(SIRvalsToday[0])
         I.append(SIRvalsToday[1])
         R.append(SIRvalsToday[2])
+        
+        
+        f.infected( Day , DateRange)         
     
     # Weekends add an extra 2 people to everyones social number
     elif 6<= Day%7 <=7:
         
-        for StudentNumber in range(s.PopulationSize):
-            
-            s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) +2
-            f.infected(StudentNumber, Day , DateRange)     
-            s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) -2
-          
         SIRvalsToday = m.CollectSIRdata()
         S.append(SIRvalsToday[0])
         I.append(SIRvalsToday[1])
         R.append(SIRvalsToday[2])
-    
+        
+        for StudentNumber in range(s.PopulationSize):            
+            s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) +2               
+           
+        f.infected(Day , DateRange) 
+        
+        for StudentNumber in range(s.PopulationSize):
+            s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) -2
+            
 SIRSeries['S'] = S
 SIRSeries['I'] = I           
 SIRSeries['R'] = R
 
 
 SIRSeries.set_index('Date',inplace=True)
-print(SIRSeries)
 SIRSeries.plot()
 
-print(ReadingWeek1Data)
+# print(datatest)
 
 # SIRSeries.pivot(index='Date', columns='SIR', values='y')
  

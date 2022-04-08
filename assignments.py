@@ -21,7 +21,7 @@ HallWeight = [0.1 , 0.2 , 0.4 , 0.3]
 Country = ['China' , 'US' , 'UK' , 'EU']
 CountryWeight = [.1 , .1 , .7 , .1]
 
-CountryInfDict = {'China':0.01 , 'UK':0.1 , 'US':0.2 , 'EU':.005} #infect % of individual nations
+CountryInfDict = {'China':0.1 , 'UK':0.05 , 'US':0.2 , 'EU':.05} #infect % of individual nations
 
 PopulationSize = 100
 Names = Names[:PopulationSize] #trims the names list - idk if necessary
@@ -62,9 +62,9 @@ class Person:
         self.Course = choice(Courses)
         
         # Performs a normal distribution and adds it to an array and picks a nunber in this so that there is a spread of sociability
-        self.Social = choice(np.random.normal(0,1, 100)) # min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
-        self.DayInfected = [[0,0]]
-        self.DayRecovered = [[0,0]]
+        self.Social = choice(np.random.normal(0,3, 100)) # min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
+        self.DayInfected = [0,0]
+        self.DayRecovered = [0,0]
 
 StudentObjects = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
 
