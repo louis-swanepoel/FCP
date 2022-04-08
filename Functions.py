@@ -16,6 +16,11 @@ import numpy as np
 
 StudentInfoDataFrame = m.CreateDataFrame()
 
+def InfectRandomStudent(Day,DateRange):
+    
+    randomStudent = r.randint(0,s.PopulationSize-1)
+    s.StudentObjects[randomStudent].SIR == 'I'  
+    s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
 
 def infected(Day , DateRange):
     
@@ -41,13 +46,13 @@ def infected(Day , DateRange):
                 for SingleInfection in range(round(proportionsSIR[0]*s.StudentObjects[StudentNumber].Social)):
                     
                     # Picks a student at random
-                    Student = r.randint(0,s.PopulationSize-1)
+                    randomStudent = r.randint(0,s.PopulationSize-1)
                                      
-                    if s.StudentObjects[Student].SIR == 'S':
-                        s.StudentObjects[Student].SIR = 'I'
+                    if s.StudentObjects[randomStudent].SIR == 'S':
+                        s.StudentObjects[randomStudent].SIR = 'I'
                         
                         # Adds date of infection as attribute
-                        s.StudentObjects[Student].DayInfected = ([DateRange[Day],Day])
+                        s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
                     else:
                         None
             
