@@ -42,7 +42,6 @@ def CreateDataFrame():
     return StudentInfoDataFrame
 
 
-
 # Function to collect SIR data for population -- returns a dataframe of proportiona and frequency against SIR 
 def CollectSIRdata():
     # Create Lists to collect S, I and R statuses in bins 
@@ -86,7 +85,7 @@ def CollectSIRdata():
     
     return proportionsSIR
       
-    
+   
 # returns--  SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where each is a nested list of SIR data 
 def DailyDataSIR():
     

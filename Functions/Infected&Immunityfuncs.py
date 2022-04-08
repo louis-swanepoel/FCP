@@ -17,7 +17,7 @@ def Infected(proximity, Immunity): #arguments proximity and Immunity relating to
             InfectedStatus = 0
     return InfectedStatus             # returns 1 for infected and 0 for not infected
       
-print(Infected(True, False))
+# print(Infected(True, False))
 
 def Immunity(Infected, DateOfInfection, currentt):
     ImmunityStatus = 0
@@ -32,6 +32,6 @@ def Immunity(Infected, DateOfInfection, currentt):
     
 print(Immunity(1,30,40))
 
-for i in list:
-    Infected(i.proximity, i.Immunity)
+# for i in list:
+#     Infected(i.proximity, i.Immunity)
         
