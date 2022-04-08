@@ -40,7 +40,7 @@ for Day in range(0,len(DateRange)):
         R.append(SIRvalsToday[2])
         
         # Collects whatever data you want at the start of the reading week 1
-        if Day == 30:
+        if Day == 31:
             
             #Calling function SIRinfofilter to find out who was infected in the onrth halls at the start of the reading week 
             ReadingWeek1Data = m.SIRinfoFilter('I', None, None, 'North', None)
@@ -55,20 +55,17 @@ for Day in range(0,len(DateRange)):
         I.append(SIRvalsToday[1])
         R.append(SIRvalsToday[2])
         
-        if Day == 230:
+        if Day == 229:
             
             for StudentNumber in range(s.PopulationSize):
-                # if s.StudentObjects[StudentNumber].Origin == 'EU':                   
-                s.StudentObjects[StudentNumber].SIR == 'I'  
-                s.StudentObjects[StudentNumber].DayInfected = ([DateRange[Day],Day])
-        elif Day == 200:
+                if s.StudentObjects[StudentNumber].Origin == 'EU':                   
+                    s.StudentObjects[StudentNumber].SIR == 'I'  
+                    s.StudentObjects[StudentNumber].DayInfected = ([DateRange[Day],Day])
+        elif Day == 201:
             
+            # Collects whatever data you want at the start of the Christmas holidays
             ChristmasData = m.SIRinfoFilter('I', None, None, 'North', None)     
-                       
 
-        # Collects whatever data you want at the start of the Christmas holidays
-        
-            
     elif Day in range (260,267):
         
         SIRvalsToday = m.CollectSIRdata()
@@ -111,11 +108,12 @@ SIRSeries['S'] = S
 SIRSeries['I'] = I           
 SIRSeries['R'] = R
 
-
+SIRSeries = SIRSeries.drop(labels=range(60, 322), axis=0)
+print(SIRSeries)
 SIRSeries.set_index('Date',inplace=True)
 SIRSeries.plot()
 
-# print(datatest)
+print(ChristmasData)
 
 # SIRSeries.pivot(index='Date', columns='SIR', values='y')
  

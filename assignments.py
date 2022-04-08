@@ -62,7 +62,7 @@ class Person:
         self.Course = choice(Courses)
         
         # Performs a normal distribution and adds it to an array and picks a nunber in this so that there is a spread of sociability
-        self.Social = choice(np.random.normal(0,3, 100)) # min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
+        self.Social = choice(np.random.normal(2,0.5, 1000)) # min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
         self.DayInfected = [0,0]
         self.DayRecovered = [0,0]
 
