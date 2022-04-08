@@ -71,17 +71,8 @@ def CollectSIRdata():
     todaysProportionS = todaysFrequencyS/s.PopulationSize
     todaysProportionI = todaysFrequencyI/s.PopulationSize
     todaysProportionR = todaysFrequencyR/s.PopulationSize
-                
-    ## Creation of a dictionary holding SIR proportion/frequencies 
-    # informationDictSIR = {'S':{"Proportion":todaysProportionS , 'Frequency' : todaysFrequencyS } , 
-    #                       'I':{"Proportion":todaysProportionI , 'Frequency' : todaysFrequencyI } , 
-    #                      'R':{"Proportion":todaysProportionR , 'Frequency' : todaysFrequencyR }  }
     
-    ## Dataframe of SIR preportions in first row
-    # dailyDataSIR = pd.DataFrame(informationDictSIR)
-    
-    # Creation of a matrix of SIR proportions in total population
-    proportionsSIR = [todaysProportionS,todaysFrequencyI,todaysProportionR]
+    proportionsSIR = [todaysProportionS,todaysProportionI,todaysProportionR]
     
     return proportionsSIR
       
@@ -153,15 +144,85 @@ def DailyDataSIR():
             
     return  (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
    
-                           
+def SIRinfoFilter(SIRstatus, Origin, Name, Halls, Course):
+    
+    # Reuses CreateDataframe function to produce a data frame of all students data
+    StudentInfoDataFrame = CreateDataFrame()
+    
+    #   Checks to see if each respective attribute to be filtered by was defined when inputting the function 
+    if isinstance(SIRstatus,str) == True:    
+        
+        # If it was defined then it adds the filtering condition tot the dataframe
+        StudentInfoDataFrameFiltered = StudentInfoDataFrame[(StudentInfoDataFrame['SIR'] == SIRstatus)]   
+    else:
+        
+        # If no infomation was given to filter then it does not filter it by the variable and says so to the user       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrame[~(StudentInfoDataFrame['SIR'] == SIRstatus)] 
+        print('No SIR val Specified')
+    
+    # These steps are repeated for each attribute that could be filtered by  
+    if isinstance(Origin,str) == True:       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
+    else:        
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Origin'] == Origin) ]
+        print('No Origin val Specified') 
+    
+    if isinstance(Name,str) == True:       
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Name'] == Name) ]
+    else:         
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Name'] == Name) ]
+        print('No name val Specified')
+    
+    if isinstance(Halls,str) == True:
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
+    else:         
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Halls'] == Halls) ]
+        print('No Halls val Specified')     
+        
+    if isinstance(Course,str) == True:
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[(StudentInfoDataFrameFiltered['Course'] == Course) ]
+    else:        
+        StudentInfoDataFrameFiltered = StudentInfoDataFrameFiltered[~(StudentInfoDataFrameFiltered['Course'] == Course) ]
+        print('No Course val Specified') 
+    
+    # The filtered dataframe is returned
+    return  StudentInfoDataFrameFiltered    
+                         
 SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest  = DailyDataSIR()
 
 StudentInfoDataFrame = CreateDataFrame()
 
-S = StudentInfoDataFrame['SIR']
-print(S)
-   
-###### TESTING
+#### Graphing
+
+import matplotlib.pyplot as plt
+
+
+# fig = px.line(SIRSeries, x='Date', y= SIRSeries.columns)
+
+# fig.show(renderer="svg")
+
+def plotlinegraph(SIRSeries):
+    # Using a inbuilt style to change
+    # the look and feel of the plot
+    plt.style.use("fivethirtyeight")
+     
+    # setting figure size to 12, 10
+    plt.figure(figsize=(12, 10))
+     
+    # Labelling the axes and setting
+    # a title
+    plt.xlabel("Date")
+    plt.ylabel("Values")
+    plt.title("SIR")
+     
+    # plotting the "A" column and "A" column
+    # of Rolling Dataframe (window_size  = 20)
+    SIRSeries.plot('Date', 'S')
+    SIRSeries.plot('Date', 'I')
+    SIRSeries.plot('Date', 'R')
+    SIRSeries.show()
+       
+    ###### TESTING
 
 
 # StudentInfoDataFrame = CreateDataFrame()

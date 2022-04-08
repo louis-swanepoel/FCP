@@ -8,6 +8,7 @@ Created on Wed Mar 23 13:03:36 2022
 # import names as nm
 #from DictionaryMethod import Halls
 from random import choices , randint , choice
+import numpy as np
 
 with open('names.txt' , 'r') as names:
         Names = (names.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
@@ -20,9 +21,9 @@ HallWeight = [0.1 , 0.2 , 0.4 , 0.3]
 Country = ['China' , 'US' , 'UK' , 'EU']
 CountryWeight = [.1 , .1 , .7 , .1]
 
-CountryInfDict = {'China':0.01 , 'UK':0.1 , 'US':0.2 , 'EU':.05} #infect % of individual nations
+CountryInfDict = {'China':0.01 , 'UK':0.1 , 'US':0.2 , 'EU':.005} #infect % of individual nations
 
-PopulationSize = 1000
+PopulationSize = 100
 Names = Names[:PopulationSize] #trims the names list - idk if necessary
 
 Status = ['I' , 'S' ,'R' ]
@@ -59,8 +60,11 @@ class Person:
         self.Name = Names[StudentNumber]
         self.SIR = InfStatus(self.Origin) 
         self.Course = choice(Courses)
-        self.Social = min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
-
+        
+        # Performs a normal distribution and adds it to an array and picks a nunber in this so that there is a spread of sociability
+        self.Social = choice(np.random.normal(0,1, 100)) # min(randint(1,10)+Jokes(self.Course) , 10) #Used to determine n# of non uni interactions
+        self.DayInfected = [[0,0]]
+        self.DayRecovered = [[0,0]]
 
 StudentObjects = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
 
