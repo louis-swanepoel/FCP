@@ -20,7 +20,7 @@ HallWeight = [0.1 , 0.2 , 0.4 , 0.3]
 Country = ['China' , 'US' , 'UK' , 'EU']
 CountryWeight = [.1 , .1 , .7 , .1]
 
-CountryInfDict = {'China':0.1 , 'UK':0.2 , 'US':0.15 , 'EU':.05} #infect % of individual nations
+CountryInfDict = {'China':0.01 , 'UK':0.1 , 'US':0.2 , 'EU':.05} #infect % of individual nations
 
 PopulationSize = 1000
 Names = Names[:PopulationSize] #trims the names list - idk if necessary
