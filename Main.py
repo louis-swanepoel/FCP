@@ -49,7 +49,7 @@ for Day in range(0,len(DateRange)):
                     f.InfectRandomStudent(Day,DateRange)
                     
             #Calling function SIRinfofilter to find out who was infected in the onrth halls at the start of the reading week 
-            ReadingWeek1Data = m.SIRinfoFilter(None, None, None, 'North', None)
+            (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest) = m.DailyDataSIR()#m.SIRinfoFilter('I', None, None, 'North', None)
         continue
             
         # Christomas hols
@@ -113,7 +113,12 @@ SIRSeries = SIRSeries.drop(labels=range(130, 322 ), axis=0)
 SIRSeries.set_index('Date',inplace=True)
 SIRSeries.plot()
 
-print(ReadingWeek1Data)
+plt.figure()
+df = pd.DataFrame(vars(SIRlistNorth))
+print(df)
+df.plot.bar(x="Halls", y="I", rot=70, title="graph1");
+plt.plot()
+plt.show
 
 # SIRSeries.pivot(index='Date', columns='SIR', values='y')
  
