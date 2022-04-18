@@ -19,9 +19,11 @@ StudentInfoDataFrame = m.CreateDataFrame()
 def InfectRandomStudent(Day,DateRange):
     
     randomStudent = r.randint(0,s.PopulationSize-1)
-    s.StudentObjects[randomStudent].SIR == 'I'  
-    s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
-
+    
+    if s.StudentObjects[randomStudent].SIR == 'S':
+        s.StudentObjects[randomStudent].SIR = 'I'  
+        s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
+        
 def infected(Day , DateRange):
     
     # Collects SIR data to determine interactions
@@ -31,15 +33,16 @@ def infected(Day , DateRange):
         
         # Susceptible people 
         if s.StudentObjects[StudentNumber].SIR == 'S': 
-            None    
+            continue    
         
         # Infected people 
         elif s.StudentObjects[StudentNumber].SIR == 'I':
             
             # If a student has been infected for longer than 14 days they will recover and their date of recovery will be added to the attribute
-            if (Day - s.StudentObjects[StudentNumber].DayInfected[-1] ) >= r.choice(np.random.normal(14,3, s.PopulationSize)):
+            if (Day - s.StudentObjects[StudentNumber].DayInfected[-1] ) >= r.choice(np.random.normal(14,6, s.PopulationSize)):
                 s.StudentObjects[StudentNumber].SIR = 'R'
                 s.StudentObjects[StudentNumber].DayRecovered = [DateRange[Day],Day]
+                continue
             else:
                 
                 # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceotible people 
@@ -54,7 +57,7 @@ def infected(Day , DateRange):
                         # Adds date of infection as attribute
                         s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
                     else:
-                        None
+                        continue
             
             
         # Recovery time is 30 days       
