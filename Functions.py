@@ -25,7 +25,8 @@ def InfectRandomStudent(Day,DateRange):
         s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
         
 def infected(Day , DateRange):
-    
+    # Number that defines how likely an infectious person is to infect the person they interact with
+    N = 0.3
     # Collects SIR data to determine interactions
     proportionsSIR= m.CollectSIRdata()    
     
@@ -46,7 +47,7 @@ def infected(Day , DateRange):
             else:
                 
                 # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceotible people 
-                for SingleInfection in range(round(proportionsSIR[0]*s.StudentObjects[StudentNumber].Social)):
+                for SingleInfection in range(round(proportionsSIR[0]*s.StudentObjects[StudentNumber].Social*N)):
                     
                     # Picks a student at random
                     randomStudent = r.randint(0,s.PopulationSize-1)
