@@ -278,60 +278,50 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         
 def MainTimeSeriesPlot(SIRSeries):
     
+    def SIRchoice(q):
+
+        if q == 'S':
+            SIRSeries['S'].plot()
+            plt.title('Infection Data Time Series Plot')
+            plt.ylabel('Proportion of population')
+
+        elif q == 'I':
+            SIRSeries['I'].plot()
+            plt.title('Infection Data Time Series Plot')
+            plt.ylabel('Proportion of population')
+
+        elif q == 'R':
+            SIRSeries['R'].plot()
+            plt.title('Infection Data Time Series Plot')
+            plt.ylabel('Proportion of population')
+
+            
     # Plotting the time series for certain user commands
     SIRtimeseries = input('what would you like to see 1 var 2 var or 3 var against one another: ')
 
-    if SIRtimeseries == '1':
+    if SIRtimeseries == '1':        
         q = input('which one would you like to see (S,I,R): ')
-        if q == 'S':
-            SIRSeries['S'].plot()
-            plt.show()
-        elif q == 'I':
-            SIRSeries['I'].plot()
-            plt.show()
-        elif q == 'R':
-            SIRSeries['R'].plot()
-            plt.show()
+        SIRchoice(q)
     elif SIRtimeseries == '2':
         q = input('which one would you like to see (S,I,R): ')
         if q == 'S':
             SIRSeries['S'].plot()
-            q = input('which other one would you like to see (S,I,R): ')
-            if q == 'S':
-                SIRSeries['S'].plot()
-                plt.show()
-            elif q == 'I':
-                SIRSeries['I'].plot()
-                plt.show()
-            elif q == 'R':
-                SIRSeries['R'].plot()
-                plt.show()
+            SIRchoice(q)
         elif q == 'I':
             SIRSeries['I'].plot()
             q = input('which other one would you like to see (S,I,R): ')
-            if q == 'S':
-                SIRSeries['S'].plot()
-                plt.show()
-            elif q == 'I':
-                SIRSeries['I'].plot()
-                plt.show()
-            elif q == 'R':
-                SIRSeries['R'].plot()
-                plt.show()
+            SIRchoice(q)
         elif q == 'R':
             SIRSeries['R'].plot()
             q = input('which other one would you like to see (S,I,R): ')
-            if q == 'S':
-                SIRSeries['S'].plot()
-                plt.show()
-            elif q == 'I':
-                SIRSeries['I'].plot()
-                plt.show()
-            elif q == 'R':
-                SIRSeries['R'].plot()
-                plt.show()
-    else:
-        SIRSeries.plot()        
+            SIRchoice(q)
+    else:       
+        SIRSeries.plot()  
+        plt.title('Infection Data Time Series Plot')
+        plt.ylabel('Proportion of population')
+    plt.show   
+        
+        
     ###### TESTING
 
 

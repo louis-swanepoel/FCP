@@ -5,7 +5,6 @@ Created on Wed Apr  6 13:46:01 2022
 @author: Ted Mellow
 """
 
-from re import S
 import pandas as pd
 from datetime import date as d 
 import assignments as s
@@ -25,8 +24,6 @@ def InfectRandomStudent(Day,DateRange):
         s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
         
 def infected(Day , DateRange,S,I,R):
-    
-    i = True
     
     # Number that defines how likely an infectious person is to infect the person they interact with
     N = 0.2
@@ -68,33 +65,10 @@ def infected(Day , DateRange,S,I,R):
                 s.StudentObjects[StudentNumber].SIR = 'S'
             else:
                 s.StudentObjects[StudentNumber].SIR == 'R'
-                
-        i = False       
+                      
         
             
         
-        
-            
-        
-    # return d.today() as DateOfInfection
-    
-# def recovered(Infected, DateOfInfection):
-    
-#     if Infected == 1:
-        
-#         if DateOfInfection + 14 < d.today(): #current time
-#             student.SIR == 'I'    
-#         else:
-#             student.SIR =='R' #returns R for recovered
-#     else:
-#         student.SIR =='S'
-    
-# for student in s.studentobjects():
-#     if student.SIR == 'S':
-#         student.SIR = infected(student) 
-#     elif student.SIR =='I':
-#         student.SIR = recovered(student)
-#     else:
-#         student.SIR = recovered(student)
+
     
 

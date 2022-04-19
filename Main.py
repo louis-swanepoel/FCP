@@ -18,26 +18,25 @@ import random as r
 # Todays Date 
 Today = d.today()
 Today = Today.strftime("%d/%m/%Y")
-CustomDate = '17/09/2022' 
+CustomDate = input('what date would you like the simulation to end? (%d/%m/%Y or today) ')
 
+if CustomDate == 'today':
+    EndDay = Today
+else:
+    EndDay = CustomDate
+    
 # Produces an array of the date from september until now to intiate the SIR time series 
-DateRange= pd.date_range('17/09/2021', CustomDate)
+DateRange= pd.date_range('17/09/2021', EndDay)
 
-# Day when you want data collected- TESTING TO SEE IF DAY OF DATA COLLECTION CAN BE SELECTED BY THE USER
-# CollectDataDay = input('as %d-%m-%Y 00:00:00, input the date you want data collected:')
-# counter = 0
-# for date in DateRange:
-#     counter += 1
-#     if date == CollectDataDay:
-#         CollectDataDay = counter
-#         continue
-
+# This is to initiate collection of bar charts 
 dataCollection = input('would you like to collect any other data? yes/no ')
 
-
+# Here a user would specify what data wants collecting
 if dataCollection == 'yes':
     CollectDataDay = int(input('What day would you like the data collected '))
 else:   
+    
+    # Ensures data is never collected
     CollectDataDay = -1
         
 # Creater the SIR time series from the start of universirty 2021 until now
@@ -51,7 +50,7 @@ R = []
 # Going through each days until now 
 for Day in range(0,len(DateRange)):
     
-    # Collecting Data example 
+    # Data collection functions 
     m.BarChartHalls(Day, DateRange, CollectDataDay)
     m.BarChartCountries(Day, DateRange,CollectDataDay)
     
@@ -111,30 +110,17 @@ for Day in range(0,len(DateRange)):
             for StudentNumber in range(s.PopulationSize):
                 s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) -2              
             continue   
-    
+        
+# Formats the SIR vals for plotting into a time series 
 SIRSeries['S'] = S
 SIRSeries['I'] = I           
 SIRSeries['R'] = R
 SIRSeries.set_index('Date',inplace=True)
 
-
-#  Look at certain periods of time
-# SIRSeries = SIRSeries.drop(labels=range(200, 365 ), axis=0)
-
+# Function that plots the main SIR time series for the whole simulation
 m.MainTimeSeriesPlot(SIRSeries)
 
-
-
-
-plt.show
-
-# SIRSeries.pivot(index='Date', columns='SIR', values='y')
  
-# SIRSeries.plot(SIR=SIRSeries.columns, figsize=(5, 3))       
-
-# InfectionsAgainstTime = m.lineGraph(SIRSeries)
-     
-# InfectionsAgainstTime.show()   
           
             
         
