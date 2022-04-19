@@ -16,11 +16,6 @@ import numpy as np
 
 StudentInfoDataFrame = m.CreateDataFrame()
 
-
-
-
-
-
 def InfectRandomStudent(Day,DateRange):
     
     randomStudent = r.randint(0,s.PopulationSize-1)
@@ -29,11 +24,13 @@ def InfectRandomStudent(Day,DateRange):
         s.StudentObjects[randomStudent].SIR = 'I'  
         s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
         
-def infected(Day , DateRange):
+def infected(Day , DateRange,S,I,R):
+    
+    i = True
+    
     # Number that defines how likely an infectious person is to infect the person they interact with
     N = 0.2
-    # Collects SIR data to determine interactions
-    proportionsSIR= m.CollectSIRdata()    
+        
     
     for StudentNumber in range(s.PopulationSize):
         
@@ -52,7 +49,7 @@ def infected(Day , DateRange):
             else:
                 
                 # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceotible people 
-                for SingleInfection in range(round(proportionsSIR[0]*s.StudentObjects[StudentNumber].Social*N)):
+                for SingleInfection in range(round(S[-1]*s.StudentObjects[StudentNumber].Social*N)):
                     
                     # Picks a student at random
                     randomStudent = r.randint(0,s.PopulationSize-1)
@@ -63,8 +60,7 @@ def infected(Day , DateRange):
                         # Adds date of infection as attribute
                         s.StudentObjects[randomStudent].DayInfected = ([DateRange[Day],Day])
                     else:
-                        continue
-            
+                        continue            
             
         # Recovery time is 30 days       
         elif s.StudentObjects[StudentNumber].SIR == 'R':
@@ -73,7 +69,7 @@ def infected(Day , DateRange):
             else:
                 s.StudentObjects[StudentNumber].SIR == 'R'
                 
-               
+        i = False       
         
             
         

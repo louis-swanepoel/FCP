@@ -67,9 +67,6 @@ for Day in range(0,len(DateRange)):
             # Randomly Infects 10 percent of the pupolation when they travel home - this function can be tailored to wight certain ethnicities 
             for StudentNumber in range(0,round(s.PopulationSize/20)):                 
                     f.InfectRandomStudent(Day,DateRange)
-                    
-            #Calling function SIRinfofilter to find out who was infected in the onrth halls at the start of the reading week             
-            
         else:
             continue
             
@@ -98,10 +95,11 @@ for Day in range(0,len(DateRange)):
         else:
             continue
     else:
+        
         # Week days add normal infecton data            
         if 0<= Day%7 <=5:            
             m.CollectSIRdata(S,I,R)               
-            f.infected( Day , DateRange)           
+            f.infected( Day , DateRange,S,I,R)           
             continue
         
         # Weekends add an extra 2 people to everyones social number
@@ -109,7 +107,7 @@ for Day in range(0,len(DateRange)):
             m.CollectSIRdata(S,I,R)       
             for StudentNumber in range(s.PopulationSize):            
                 s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) +2                  
-            f.infected( Day , DateRange)         
+            f.infected( Day , DateRange,S,I,R)         
             for StudentNumber in range(s.PopulationSize):
                 s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) -2              
             continue   

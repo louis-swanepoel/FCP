@@ -76,8 +76,7 @@ def CollectSIRdata(S,I,R):
     
     S.append(proportionsSIR[0])
     I.append(proportionsSIR[1])
-    R.append(proportionsSIR[2]) 
-    
+    R.append(proportionsSIR[2])     
       
    
 # returns--  SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where each is a nested list of SIR data 
