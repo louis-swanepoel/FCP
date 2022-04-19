@@ -9,19 +9,38 @@ Created on Wed Mar 23 13:03:36 2022
 #from DictionaryMethod import Halls
 from random import choices , randint , choice
 import numpy as np
+import csv
 
 with open('names.txt' , 'r') as names:
         Names = (names.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
+
+Document = open('InitialConditions.csv') # imports the values from a csv
+DocumentContents = csv.reader(Document)
+Rows = []
+for row in DocumentContents:
+    Rows.append(row)
+Nations , NationWeight , InfWeight = [] , [] , []
+for entry in Rows[1:]:
+    if entry == []:
+        break
+    Nations.append(entry[0])
+    NationWeight.append(float(entry[1]))
+    InfWeight.append(float(entry[2]))
+InfDict = {j:InfWeight[i] for i , j in enumerate(Nations)} 
 
 ###Initial conditions
 
 Halls = ['East' , 'West' , 'North' , 'South']
 HallWeight = [0.1 , 0.2 , 0.4 , 0.3]
 
-Country = ['China' , 'US' , 'UK' , 'EU']
-CountryWeight = [.1 , .1 , .7 , .1]
+Country = Nations
+CountryWeight = NationWeight
+CountryInfDict = InfDict
 
-CountryInfDict = {'China':0.01 , 'UK':0.001 , 'US':0.002 , 'EU':.005} #infect % of individual nations
+# Country = ['China' , 'US' , 'UK' , 'EU']
+# CountryWeight = [.1 , .1 , .7 , .1]
+
+# CountryInfDict = {'China':0.01 , 'UK':0.001 , 'US':0.002 , 'EU':.005} #infect % of individual nations
 
 PopulationSize = 1000
 Names = Names[:PopulationSize] #trims the names list - idk if necessary
@@ -68,6 +87,6 @@ class Person:
 
 StudentObjects = [Person (i) for i in range(PopulationSize)] #Allocates every student a number
 
-
+#print(vars(StudentObjects[100]))
     
     
