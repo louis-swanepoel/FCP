@@ -16,6 +16,11 @@ import numpy as np
 
 StudentInfoDataFrame = m.CreateDataFrame()
 
+
+
+
+
+
 def InfectRandomStudent(Day,DateRange):
     
     randomStudent = r.randint(0,s.PopulationSize-1)
@@ -26,7 +31,7 @@ def InfectRandomStudent(Day,DateRange):
         
 def infected(Day , DateRange):
     # Number that defines how likely an infectious person is to infect the person they interact with
-    N = 0.3
+    N = 0.2
     # Collects SIR data to determine interactions
     proportionsSIR= m.CollectSIRdata()    
     

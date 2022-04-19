@@ -43,7 +43,7 @@ def CreateDataFrame():
 
 
 # Function to collect SIR data for population -- returns a dataframe of proportiona and frequency against SIR 
-def CollectSIRdata():
+def CollectSIRdata(S,I,R):
     # Create Lists to collect S, I and R statuses in bins 
     Slist = []
     Ilist = []
@@ -74,7 +74,10 @@ def CollectSIRdata():
     
     proportionsSIR = [todaysProportionS,todaysProportionI,todaysProportionR]
     
-    return proportionsSIR
+    S.append(proportionsSIR[0])
+    I.append(proportionsSIR[1])
+    R.append(proportionsSIR[2]) 
+    
       
    
 # returns--  SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where each is a nested list of SIR data 
@@ -271,7 +274,9 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         plt.title('Nationality infection data:'+ str(DateRange[Day]))
         plt.xlabel('Nationality')
         plt.ylabel(yAxisName)
-        plt.show()   
+        plt.show()
+        
+        
 def MainTimeSeriesPlot(SIRSeries):
     
     # Plotting the time series for certain user commands

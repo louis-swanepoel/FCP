@@ -59,10 +59,7 @@ for Day in range(0,len(DateRange)):
     if Day in range (30,37):
         
         # Each time this is called it collects the data and adds it to the time series 
-        SIRvalsToday = m.CollectSIRdata()
-        S.append(SIRvalsToday[0])
-        I.append(SIRvalsToday[1])
-        R.append(SIRvalsToday[2])
+        m.CollectSIRdata(S,I,R)
                 
         # Collects whatever data you want at the start of the reading week 1
         if Day == 31:            
@@ -78,10 +75,7 @@ for Day in range(0,len(DateRange)):
             
         # Christomas hols
     elif Day in range (90,120):        
-        SIRvalsToday = m.CollectSIRdata()
-        S.append(SIRvalsToday[0])
-        I.append(SIRvalsToday[1])
-        R.append(SIRvalsToday[2])        
+        m.CollectSIRdata(S,I,R)               
         if Day == 118:           
             for StudentNumber in range(0,round(s.PopulationSize/90)):                   
                    f.InfectRandomStudent(Day,DateRange)                    
@@ -94,10 +88,7 @@ for Day in range(0,len(DateRange)):
         
     #   Easter hols
     elif Day in range (200,214):        
-        SIRvalsToday = m.CollectSIRdata()
-        S.append(SIRvalsToday[0])
-        I.append(SIRvalsToday[1])
-        R.append(SIRvalsToday[2])
+        m.CollectSIRdata(S,I,R)
         
         # Collects whatever data you want at the start of the reading week 2
         if Day == 213:            
@@ -108,21 +99,14 @@ for Day in range(0,len(DateRange)):
             continue
     else:
         # Week days add normal infecton data            
-        if 0<= Day%7 <=5:
-            
-            SIRvalsToday = m.CollectSIRdata()
-            S.append(SIRvalsToday[0])
-            I.append(SIRvalsToday[1])
-            R.append(SIRvalsToday[2])               
+        if 0<= Day%7 <=5:            
+            m.CollectSIRdata(S,I,R)               
             f.infected( Day , DateRange)           
             continue
         
         # Weekends add an extra 2 people to everyones social number
         elif 6<= Day%7 <=7:       
-            SIRvalsToday = m.CollectSIRdata()
-            S.append(SIRvalsToday[0])
-            I.append(SIRvalsToday[1])
-            R.append(SIRvalsToday[2])       
+            m.CollectSIRdata(S,I,R)       
             for StudentNumber in range(s.PopulationSize):            
                 s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) +2                  
             f.infected( Day , DateRange)         
