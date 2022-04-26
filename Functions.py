@@ -45,8 +45,8 @@ def infected(Day , DateRange,S,I,R):
                 continue
             else:
                 
-                # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceotible people 
-                for SingleInfection in range(round(S[-1]*s.StudentObjects[StudentNumber].Social*N)):
+                # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceptible people 
+                for SingleInfection in range(int(round(S[-1]*s.StudentObjects[StudentNumber].Social*N))):
                     
                     # Picks a student at random
                     randomStudent = r.randint(0,s.PopulationSize-1)

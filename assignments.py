@@ -15,11 +15,11 @@ with open('names.txt' , 'r') as names:
         Names = (names.read().replace('\n' , ' ')).split(' ') # creates a list of names from a text file
 
 Document = open('InitialConditions.csv') # imports the values from a csv
-DocumentContents = csv.reader(Document)
+DocumentContents = csv.reader(Document)  
 Rows = []
 for row in DocumentContents:
     Rows.append(row)
-Nations , NationWeight , InfWeight = [] , [] , []
+Nations , NationWeight , InfWeight = [] , [] , [] 
 for entry in Rows[1:]:
     if entry == []:
         break

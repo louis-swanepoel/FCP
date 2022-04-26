@@ -33,13 +33,13 @@ dataCollection = input('would you like to collect any other data? yes/no ')
 
 # Here a user would specify what data wants collecting
 if dataCollection == 'yes':
-    CollectDataDay = int(input('What day would you like the data collected '))
+    CollectDataDay = int(input('What day would you like the data collected on?'))
 else:   
     
     # Ensures data is never collected
     CollectDataDay = -1
         
-# Creater the SIR time series from the start of universirty 2021 until now
+# Creater the SIR time series from the start of university 2021 until now
 SIRSeries = pd.DataFrame(DateRange, columns=['Date'])
 
 # Empty lists to collect people of SIR statuses respectively 
@@ -53,7 +53,7 @@ for Day in range(0,len(DateRange)):
     # Data collection functions 
     m.BarChartHalls(Day, DateRange, CollectDataDay)
     m.BarChartCountries(Day, DateRange,CollectDataDay)
-    
+    m.BarChartCourse(Day, DateRange, CollectDataDay)
     # Holidays only add the data and do not change the infection numbers
     if Day in range (30,37):
         
@@ -74,7 +74,7 @@ for Day in range(0,len(DateRange)):
         m.CollectSIRdata(S,I,R)               
         if Day == 118:           
             for StudentNumber in range(0,round(s.PopulationSize/90)):                   
-                   f.InfectRandomStudent(Day,DateRange)                    
+                   f.InfectRandomS(itudent(Day,DateRange)                    
         elif Day == 119:         
            
             # Collects whatever data you want at the start of the Christmas holidays- if you want data on a day other than a collect data day then call today as the collectdataday
@@ -119,6 +119,7 @@ SIRSeries.set_index('Date',inplace=True)
 
 # Function that plots the main SIR time series for the whole simulation
 m.MainTimeSeriesPlot(SIRSeries)
+print(SIRSeries)                    
 
  
           

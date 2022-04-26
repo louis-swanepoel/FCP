@@ -231,13 +231,16 @@ def BarChartHalls(Day, DateRange,CollectDataDay):
         
         (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest) = DailyDataSIR(Day,Day)
         
-        SIRinputChoice = input('input 0,1,2 for SIR y axis in Halls plot:')
-        if SIRinputChoice == '0':
+        SIRinputChoice = input('input S,I,R for SIR y axis in Halls plot:')
+        if SIRinputChoice == 'S':
+            SIRinputChoice = '0'
             yAxisName = "Susceptible"
-        elif SIRinputChoice == '1':
+        elif SIRinputChoice == 'I':
+            SIRinputChoice = '1'
             yAxisName = "Infected"
         else:
-           yAxisName = "Recovered"
+            SIRinputChoice = '2'
+            yAxisName = "Recovered"
            
         SIR = [len(SIRlistNorth[int(SIRinputChoice)]), len(SIRlistEast[int(SIRinputChoice)]), len(SIRlistSouth[int(SIRinputChoice)]) , len(SIRlistWest[int(SIRinputChoice)])] 
         Halls = "North","South","East","West"
@@ -248,6 +251,32 @@ def BarChartHalls(Day, DateRange,CollectDataDay):
         plt.ylabel(yAxisName)
         plt.show()   
         
+def BarChartCourse(Day, DateRange, CollectDataDay):
+    
+    if Day == CollectDataDay:
+        
+        Course = 'STEM', 'ARTS'
+        
+        SIRinputChoice = input('input S,I,R for SIR vals in y axis for courses plot:')
+
+        if SIRinputChoice == 'S':
+            yAxisName = "Susceptible"
+        elif SIRinputChoice == 'I':
+            yAxisName = "Infected"
+        else:
+           yAxisName = "Recovered"
+        
+        Stem = len(SIRinfoFilter(SIRinputChoice, None, None, None, 'STEM', Day, Day))
+        Arts = len(SIRinfoFilter(SIRinputChoice, None, None, None, 'ARTS', Day, Day))
+        
+        SIR = [Stem, Arts]
+        
+        plt.bar(Course,SIR)
+        plt.title('Course infection data:'+ str(DateRange[Day]))
+        plt.xlabel('Course')
+        plt.ylabel(yAxisName)
+        plt.show()
+        
 def BarChartCountries(Day, DateRange,CollectDataDay):
     
     if Day == CollectDataDay:
@@ -255,6 +284,7 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         countries = 'China' , 'US' , 'UK' , 'EU'
 
         SIRinputChoice = input('input S,I,R for SIR vals in y axis for countries plot:')
+        
         if SIRinputChoice == 'S':
             yAxisName = "Susceptible"
         elif SIRinputChoice == 'I':
@@ -274,6 +304,10 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         plt.xlabel('Nationality')
         plt.ylabel(yAxisName)
         plt.show()
+        df = (CreateDataFrame())
+        MainData = pd.ExcelWriter('MainSpreadsheet.xlsx')
+        df.to_excel(MainData)
+        MainData.save()
         
         
 def MainTimeSeriesPlot(SIRSeries):
@@ -320,7 +354,7 @@ def MainTimeSeriesPlot(SIRSeries):
         plt.title('Infection Data Time Series Plot')
         plt.ylabel('Proportion of population')
     plt.show   
-        
+
         
     ###### TESTING
 
