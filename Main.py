@@ -7,7 +7,7 @@ Created on Tue Mar 29 18:58:23 2022
 """
 import pandas as pd
 from datetime import date as d 
-import assignments as s
+import Assignments as s
 import argparse as ap
 import Metrics as m
 import Functions as f
@@ -74,7 +74,7 @@ for Day in range(0,len(DateRange)):
         m.CollectSIRdata(S,I,R)               
         if Day == 118:           
             for StudentNumber in range(0,round(s.PopulationSize/90)):                   
-                   f.InfectRandomS(itudent(Day,DateRange)                    
+                   f.InfectRandomStudent(Day,DateRange)                    
         elif Day == 119:         
            
             # Collects whatever data you want at the start of the Christmas holidays- if you want data on a day other than a collect data day then call today as the collectdataday
@@ -121,7 +121,7 @@ SIRSeries.set_index('Date',inplace=True)
 m.MainTimeSeriesPlot(SIRSeries)
 print(SIRSeries)                    
 
- 
+
           
             
         

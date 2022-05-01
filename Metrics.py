@@ -8,7 +8,7 @@ Created on Wed Mar 23 13:03:36 2022
 # import names as nm
 import pandas as pd 
 import random as r
-import assignments as s
+import Assignments as s
 
 
 # Function to create dataframe of students information  -- returns dataframe of all the students attributes 
@@ -44,28 +44,11 @@ def CreateDataFrame():
 
 # Function to collect SIR data for population -- returns a dataframe of proportiona and frequency against SIR 
 def CollectSIRdata(S,I,R):
-    # Create Lists to collect S, I and R statuses in bins 
-    Slist = []
-    Ilist = []
-    Rlist = []
     
-    # Iterate through each student
-    for StudentNumber in range(s.PopulationSize):
-        
-        # Add each students SIR status to the correct bin so now the bins have collected all students
-        if s.StudentObjects[StudentNumber].SIR == 'S':
-            Slist.append(s.StudentObjects[StudentNumber].SIR)        
-        elif s.StudentObjects[StudentNumber].SIR == 'I':
-            Ilist.append(s.StudentObjects[StudentNumber].SIR)
-        elif s.StudentObjects[StudentNumber].SIR == 'R':
-            Rlist.append(s.StudentObjects[StudentNumber].SIR)
-        else:
-            raise ValueError('Student must have an SIR value')
-            
     # Tally up frequency of each bin to find out how many people are S, I OR R
-    todaysFrequencyS = len(Slist)
-    todaysFrequencyI = len(Ilist)
-    todaysFrequencyR = len(Rlist)
+    todaysFrequencyS = len(SIRinfoFilter('S', None, None, None, None, True,True))
+    todaysFrequencyI = len(SIRinfoFilter('I', None, None, None, None, True,True))
+    todaysFrequencyR = len(SIRinfoFilter('R', None, None, None, None, True,True))
     
     # Find Proportion
     todaysProportionS = todaysFrequencyS/s.PopulationSize
@@ -80,73 +63,7 @@ def CollectSIRdata(S,I,R):
       
    
 # returns--  SIRlistNorth, SIRlistEast, SIRlistSouth , SIRlistWest where each is a nested list of SIR data 
-def DailyDataSIR(Day,CollectDataDay):
-    
-    if Day == CollectDataDay:
-    
-        # Create Lists to collect S, I and R statuses in bins 
-        SlistPop = []
-        IlistPop = []
-        RlistPop = []
-        
-            
-        # List of SIR for each halls 
-        SIRlistNorth = [[],[],[]]
-        SIRlistEast = [[],[],[]]
-        SIRlistWest = [[],[],[]]
-        SIRlistSouth = [[],[],[]]
-    
-        # Iterate through each student
-        for StudentNumber in range(s.PopulationSize):
-    
-            # Add each students SIR status to the correct bin so now the bins have collected all students
-            if s.StudentObjects[StudentNumber].SIR == 'S':
-                SlistPop.append(s.StudentObjects[StudentNumber]) 
-    
-                if s.StudentObjects[StudentNumber].Halls == 'North':
-                    SIRlistNorth[0].append(s.StudentObjects[StudentNumber])           
-                elif s.StudentObjects[StudentNumber].Halls == 'East':
-                    SIRlistEast[0].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'West':
-                    SIRlistWest[0].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'South':
-                    SIRlistSouth[0].append(s.StudentObjects[StudentNumber])
-                else:
-                    ValueError('Student must have an SIR value')
-    
-    
-            elif s.StudentObjects[StudentNumber].SIR == 'I':
-                IlistPop.append(s.StudentObjects[StudentNumber])
-    
-                if s.StudentObjects[StudentNumber].Halls == 'North':
-                    SIRlistNorth[1].append(s.StudentObjects[StudentNumber])           
-                elif s.StudentObjects[StudentNumber].Halls == 'East':
-                    SIRlistEast[1].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'West':
-                    SIRlistWest[1].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'South':
-                    SIRlistSouth[1].append(s.StudentObjects[StudentNumber])
-                else:
-                    ValueError('Student must have an SIR value')
-    
-            elif s.StudentObjects[StudentNumber].SIR == 'R':
-                RlistPop.append(s.StudentObjects[StudentNumber])
-    
-                if s.StudentObjects[StudentNumber].Halls == 'North':
-                    SIRlistNorth[2].append(s.StudentObjects[StudentNumber])           
-                elif s.StudentObjects[StudentNumber].Halls == 'East':
-                    SIRlistEast[2].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'West':
-                    SIRlistWest[2].append(s.StudentObjects[StudentNumber])
-                elif s.StudentObjects[StudentNumber].Halls == 'South':
-                    SIRlistSouth[2].append(s.StudentObjects[StudentNumber])
-                else:
-                    ValueError('Student must have an SIR value')
-    
-            else:
-                raise ValueError('Student must have an SIR value')
-                
-        return  (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest)
+
    
 def SIRinfoFilter(SIRstatus, Origin, Name, Halls, Course, Day,CollectDataDay):
     
@@ -229,22 +146,23 @@ def plotlinegraph(SIRSeries):
 def BarChartHalls(Day, DateRange,CollectDataDay):
     if Day == CollectDataDay:
         
-        (SIRlistNorth), (SIRlistEast), (SIRlistSouth) , (SIRlistWest) = DailyDataSIR(Day,Day)
-        
-        SIRinputChoice = input('input S,I,R for SIR y axis in Halls plot:')
+        SIRinputChoice = input('input S,I,R for SIR vals in y axis for courses plot:')
+
         if SIRinputChoice == 'S':
-            SIRinputChoice = '0'
             yAxisName = "Susceptible"
         elif SIRinputChoice == 'I':
-            SIRinputChoice = '1'
             yAxisName = "Infected"
         else:
-            SIRinputChoice = '2'
-            yAxisName = "Recovered"
-           
-        SIR = [len(SIRlistNorth[int(SIRinputChoice)]), len(SIRlistEast[int(SIRinputChoice)]), len(SIRlistSouth[int(SIRinputChoice)]) , len(SIRlistWest[int(SIRinputChoice)])] 
-        Halls = "North","South","East","West"
-    
+           yAxisName = "Recovered"
+        
+        North = len(SIRinfoFilter(SIRinputChoice, None, None, 'North',None , Day, Day))
+        East = len(SIRinfoFilter(SIRinputChoice, None, None, 'East',None, Day, Day))
+        South = len(SIRinfoFilter(SIRinputChoice, None, None, 'South', None, Day, Day))
+        West = len(SIRinfoFilter(SIRinputChoice, None, None, 'West', None, Day, Day))        
+       
+        SIR = [North,South,East,West] 
+        Halls = 'North', 'South', 'East', 'West'
+        
         plt.bar(Halls,SIR)
         plt.title('Halls infection data:'+ str(DateRange[Day]))
         plt.xlabel('Halls')

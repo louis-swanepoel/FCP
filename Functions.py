@@ -7,7 +7,7 @@ Created on Wed Apr  6 13:46:01 2022
 
 import pandas as pd
 from datetime import date as d 
-import assignments as s
+import Assignments as s
 import Metrics as m
 import random as r
 import numpy as np
@@ -45,6 +45,7 @@ def infected(Day , DateRange,S,I,R):
                 continue
             else:
                 
+                #### NEEDS TO BE REVISED #####
                 # Iterating through the number of people this infected person runs into each day by multiplying social number with number of susceptible people 
                 for SingleInfection in range(int(round(S[-1]*s.StudentObjects[StudentNumber].Social*N))):
                     
