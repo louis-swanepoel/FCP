@@ -36,7 +36,7 @@ The outcome of the code would look something like this: ![Image](https://github.
 
 ## Credits:
 
-- Louis Swanepoel: [link]https://github.com/louis-swanepoel
-- Ludo Oliver: [link]https://github.com/xd21736
-- Ted Mellow: [link]https://github.com/Ted-Mellow
-- Alex De Oliveira: [link]https://github.com/AlexDE6
+- Louis Swanepoel: [link](https://github.com/louis-swanepoel)
+- Ludo Oliver: [link](https://github.com/xd21736)
+- Ted Mellow: [link](https://github.com/Ted-Mellow)
+- Alex De Oliveira: [link](https://github.com/AlexDE6)
