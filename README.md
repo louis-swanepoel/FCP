@@ -10,15 +10,15 @@ The purpose of the code is to simulate the covid-19 virus throughout the first y
 
 This code requires a few pre-installed packages: 
 
-* Matplotlib [https://matplotlib.org/stable/users/installing/index.html]
+* Matplotlib [Guide](https://matplotlib.org/stable/users/installing/index.html)
 
-* Numpy [https://numpy.org/install/]
+* Numpy [Guide](https://numpy.org/install/)
 
-* Plotly [https://plotly.com/python/getting-started/]
+* Plotly [Guide](https://plotly.com/python/getting-started/)
 
-* Pandas [https://pandas.pydata.org/docs/getting_started/install.html]
+* Pandas [Guide](https://pandas.pydata.org/docs/getting_started/install.html)
 
-* DateTime [https://pypi.org/project/DateTime/]
+* DateTime [Guide](https://pypi.org/project/DateTime/)
 
 ## How to use the code:
 
@@ -36,7 +36,7 @@ The outcome of the code would look something like this: ![Image](https://github.
 
 ## Credits:
 
-- Louis Swanepoel: [link](https://github.com/louis-swanepoel)
-- Ludo Oliver: [link](https://github.com/xd21736)
-- Ted Mellow: [link](https://github.com/Ted-Mellow)
-- Alex De Oliveira: [link](https://github.com/AlexDE6)
+- Louis Swanepoel: [Github User](https://github.com/louis-swanepoel)
+- Ludo Oliver: [Github User](https://github.com/xd21736)
+- Ted Mellow: [Github User](https://github.com/Ted-Mellow)
+- Alex De Oliveira: [Github User](https://github.com/AlexDE6)
