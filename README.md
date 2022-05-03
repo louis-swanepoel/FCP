@@ -20,6 +20,9 @@ This code requires a few pre-installed packages:
 
 * DateTime [Guide](https://pypi.org/project/DateTime/)
 
+If the code is being ran on the linux lab machines, the conda environment can be activated with:
+'source /opt/anaconda/2020.07/bin/activate'
+
 ## How to use the code:
 
 The code is simple for the user, and only requires running the main.py file.
