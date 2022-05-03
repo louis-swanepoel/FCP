@@ -30,7 +30,7 @@ Once ran, the user will be asked when they want the simulation to end, which ext
 The user will then be asked whether they want to collect any other data, which will lead to the courses, nationality and halls plots being presented. Otherwise, only the SIR model will be presented.
 
 The date of this data collection is asked, and then further prompts specifying the type of data to be represented are asked, such as the choice between S, I and R. 
-
+https://github.com/louis-swanepoel/FCP/blob/main/Example%20Screenshot.png
 Finally, the user will be asked whether they want to see the representation of 1, 2 or 3 variables on the SIR graph. 
 
-The outcome of the code would look something like this: ![Image](/Screenshot from 2022-05-03 13-40-58.png?raw=true)
+The outcome of the code would look something like this: ![Image](https://github.com/louis-swanepoel/FCP/blob/main/Example%20Screenshot.png)
