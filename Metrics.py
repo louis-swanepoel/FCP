@@ -8,7 +8,7 @@ Created on Wed Mar 23 13:03:36 2022
 # import names as nm
 import pandas as pd 
 import random as r
-import Assignments as s
+import assignments as s
 
 
 # Function to create dataframe of students information  -- returns dataframe of all the students attributes 
@@ -146,7 +146,7 @@ def plotlinegraph(SIRSeries):
 def BarChartHalls(Day, DateRange,CollectDataDay):
     if Day == CollectDataDay:
         
-        SIRinputChoice = input('input S,I,R for SIR vals in y axis for courses plot:')
+        SIRinputChoice = input('input S,I,R for SIR vals in y axis for Halls plot:')
 
         if SIRinputChoice == 'S':
             yAxisName = "Susceptible"
