@@ -1,23 +1,27 @@
 # FCP
-#further computer programming coursework.
+# further computer programming coursework.
 
 Simulating Covid 19 Throughout Bristol University First Year Students.
 
-##Description
+## Description
 
 The purpose of the code is to simulate the covid-19 virus throughout the first year accomodations, considering the origin of the student, how social they are, their halls and their course. These conditions can be tweaked within the InitialConditions.csv file. 
 
-##Installing and Running.
+## Installing and Running.
 
 This code requires a few pre-installed packages: 
 
-Matplotlib [https://matplotlib.org/stable/users/installing/index.html]
-Numpy [https://numpy.org/install/]
-Plotly [https://plotly.com/python/getting-started/]
-Pandas [https://pandas.pydata.org/docs/getting_started/install.html]
-DateTime [https://pypi.org/project/DateTime/]
+* Matplotlib [https://matplotlib.org/stable/users/installing/index.html]
 
-##How to use the code:
+* Numpy [https://numpy.org/install/]
+
+* Plotly [https://plotly.com/python/getting-started/]
+
+* Pandas [https://pandas.pydata.org/docs/getting_started/install.html]
+
+* DateTime [https://pypi.org/project/DateTime/]
+
+## How to use the code:
 
 The code is simple for the user, and only requires running the main.py file.
 
@@ -29,4 +33,4 @@ The date of this data collection is asked, and then further prompts specifying t
 
 Finally, the user will be asked whether they want to see the representation of 1, 2 or 3 variables on the SIR graph. 
 
-The outcome of the code would look something like this: ![Image](Screenshot from 2022-05-03 13-40-58.png)
+The outcome of the code would look something like this: ![Image](/Screenshot from 2022-05-03 13-40-58.png?raw=true)
