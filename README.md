@@ -23,6 +23,7 @@ This code requires a few pre-installed packages:
 If the code is being ran on the linux lab machines, the conda environment can be activated with:
 'source /opt/anaconda/2020.07/bin/activate'
 
+Then add the command 'python Main.py' for the code to begin.
 ## How to use the code:
 
 The code is simple for the user, and only requires running the main.py file.
