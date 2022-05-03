@@ -34,3 +34,10 @@ https://github.com/louis-swanepoel/FCP/blob/main/Example%20Screenshot.png
 Finally, the user will be asked whether they want to see the representation of 1, 2 or 3 variables on the SIR graph. 
 
 The outcome of the code would look something like this: ![Image](https://github.com/louis-swanepoel/FCP/blob/main/Example%20Screenshot.png)
+
+## Credits:
+
+Louis Swanepoel: [link]https://github.com/louis-swanepoel
+Ludo Oliver: [link]https://github.com/xd21736
+Ted Mellow: [link]https://github.com/Ted-Mellow
+Alex De Oliveira: [link]https://github.com/AlexDE6
