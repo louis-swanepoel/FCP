@@ -163,7 +163,7 @@ def BarChartHalls(Day, DateRange,CollectDataDay):
         SIR = [North,South,East,West] 
         Halls = 'North', 'South', 'East', 'West'
         
-        plt.bar(Halls,SIR)
+        plt.bar(Halls,SIR, color=['red', 'green', 'blue', 'cyan'])
         plt.title('Halls infection data:'+ str(DateRange[Day]))
         plt.xlabel('Halls')
         plt.ylabel(yAxisName)
@@ -189,7 +189,7 @@ def BarChartCourse(Day, DateRange, CollectDataDay):
         
         SIR = [Stem, Arts]
         
-        plt.bar(Course,SIR)
+        plt.bar(Course,SIR,color=['red', 'green'])
         plt.title('Course infection data:'+ str(DateRange[Day]))
         plt.xlabel('Course')
         plt.ylabel(yAxisName)
@@ -217,7 +217,7 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         
         SIR = [china,us,uk,eu]
     
-        plt.bar(countries,SIR)
+        plt.bar(countries,SIR, color=['red', 'cyan'])
         plt.title('Nationality infection data:'+ str(DateRange[Day]))
         plt.xlabel('Nationality')
         plt.ylabel(yAxisName)
