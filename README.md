@@ -26,7 +26,7 @@ If the code is being ran on the linux lab machines, the conda environment can be
 Then add the command 'python Main.py' for the code to begin.
 ## How to use the code:
 
-The code is simple for the user, and only requires running the main.py file.
+The code is simple for the user, and only requires running the main.py file, though all files in the repository must be downloaded into the same directory.
 
 Once ran, the user will be asked when they want the simulation to end, which extends up to the current day, today.
 
