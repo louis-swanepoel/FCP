@@ -7,7 +7,7 @@ Created on Wed Apr  6 13:46:01 2022
 
 import pandas as pd
 from datetime import date as d 
-import Assignments as s
+import assignments as s
 import Metrics as m
 import random as r
 import numpy as np
@@ -66,6 +66,23 @@ def infected(Day , DateRange,S,I,R):
                 s.StudentObjects[StudentNumber].SIR = 'S'
             else:
                 s.StudentObjects[StudentNumber].SIR == 'R'
+             
+def WDSocialNum(Day):
+    STEM = 2
+    ARTS = 1
+    Course = [STEM, ARTS]
+    Library = 2 # adds 2 people
+    Home = 0 # adds 0 people
+    Coffeeshop = 2 # adds 2 people
+    Exercise = 1 # adds 1 person
+    Friends = 2 # adds 2 people
+    StudyTime = [Library, Home, Coffeeshop] # places to study list
+    Hobbies = [Exercise, Friends, Home] # activities/hobbies list 
+    for StudentNumber in range(s.PopulationSize):    
+        if s.StudentObjects[StudentNumber].Course == 'STEM':
+            s.StudentObjects[StudentNumber].Social = STEM + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2])
+        else:
+            s.StudentObjects[StudentNumber].Social = ARTS + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2])  
                       
         
             
