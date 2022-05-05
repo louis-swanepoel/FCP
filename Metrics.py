@@ -215,7 +215,7 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         SIR = [china,us,uk,eu]
 
         # Plotting and showing the information for this graph
-        plt.bar(countries,SIR, color=['red', 'cyan'])
+        plt.bar(countries,SIR, color=['red', 'cyan', 'purple', 'yellow'])
         plt.title('Nationality infection data:'+ str(DateRange[Day]))
         plt.xlabel('Nationality')
         plt.ylabel(yAxisName)
