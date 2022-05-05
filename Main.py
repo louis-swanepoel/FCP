@@ -19,27 +19,10 @@ import numpy as np
 # Todays Date 
 Today = d.today()
 Today = Today.strftime("%d/%m/%Y")
-CustomDate = input('what date would you like the simulation to end? (%d/%m/%Y or today) ')
-
-if CustomDate == 'today':
-    EndDay = Today
-else:
-    EndDay = CustomDate
     
 # Produces an array of the date from september until now to intiate the SIR time series 
-DateRange= pd.date_range('17/09/2021', EndDay)
+DateRange= pd.date_range('17/09/2021', Today)
 
-# This is to initiate collection of bar charts 
-dataCollection = input('would you like to collect any other data? yes/no ')
-
-# Here a user would specify what data wants collecting
-if dataCollection == 'yes':
-    CollectDataDay = int(input('What day would you like the data collected on?'))
-else:   
-    
-    # Ensures data is never collected
-    CollectDataDay = -1
-        
 # Creater the SIR time series from the start of university 2021 until now
 SIRSeries = pd.DataFrame(DateRange, columns=['Date'])
 
@@ -52,9 +35,9 @@ R = []
 for Day in range(0,len(DateRange)):
     
     # Data collection functions 
-    m.BarChartHalls(Day, DateRange, CollectDataDay)
-    m.BarChartCountries(Day, DateRange,CollectDataDay)
-    m.BarChartCourse(Day, DateRange, CollectDataDay)
+    m.BarChartHalls(Day, DateRange, s.Day[0])
+    m.BarChartCountries(Day, DateRange,s.Day[2])
+    m.BarChartCourse(Day, DateRange, s.Day[1])
     # Holidays only add the data and do not change the infection numbers
     if Day in range (30,37):
         
@@ -129,13 +112,17 @@ for Day in range(0,len(DateRange)):
 # Formats the SIR vals for plotting into a time series 
 SIRSeries['S'] = S
 SIRSeries['I'] = I           
-SIRSeries['R'] = R#!/usr/bin/env python
-
+SIRSeries['R'] = R
 SIRSeries.set_index('Date',inplace=True)
 
 # Function that plots the main SIR time series for the whole simulation
-m.MainTimeSeriesPlot(SIRSeries)
-print(SIRSeries)                    
+if s.PlotOrNot[3] == 'TRUE':
+    m.MainTimeSeriesPlot(SIRSeries)
+else:
+    print('Simulation finished')
+
+# Creates an excel file in the directory with all the attributes of the population 
+m.SaveMainDataframeOfAttributes()                 
 
 
           

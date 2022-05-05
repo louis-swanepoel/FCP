@@ -6,6 +6,7 @@ Created on Wed Mar 23 13:03:36 2022
 @author: louisswanepoel
 """
 # import names as nm
+from ast import Break
 import pandas as pd 
 import random as r
 import Assignments as s
@@ -144,21 +145,19 @@ def plotlinegraph(SIRSeries):
 
 # Bar chart for halls SIR data
 def BarChartHalls(Day, DateRange,CollectDataDay):
-    if Day == CollectDataDay:
-        
-        SIRinputChoice = input('input S,I,R for SIR vals in y axis for Halls plot:')
+    if Day == CollectDataDay and s.PlotOrNot[0]== 'TRUE':
 
-        if SIRinputChoice == 'S':
+        if s.Sir[0] == 'S':
             yAxisName = "Susceptible"
-        elif SIRinputChoice == 'I':
+        elif s.Sir[0] == 'I':
             yAxisName = "Infected"
         else:
            yAxisName = "Recovered"
         
-        North = len(SIRinfoFilter(SIRinputChoice, None, None, 'North',None , Day, Day))
-        East = len(SIRinfoFilter(SIRinputChoice, None, None, 'East',None, Day, Day))
-        South = len(SIRinfoFilter(SIRinputChoice, None, None, 'South', None, Day, Day))
-        West = len(SIRinfoFilter(SIRinputChoice, None, None, 'West', None, Day, Day))        
+        North = len(SIRinfoFilter(s.Sir[0], None, None, 'North',None , Day, Day))
+        East = len(SIRinfoFilter(s.Sir[0], None, None, 'East',None, Day, Day))
+        South = len(SIRinfoFilter(s.Sir[0], None, None, 'South', None, Day, Day))
+        West = len(SIRinfoFilter(s.Sir[0], None, None, 'West', None, Day, Day))        
        
         SIR = [North,South,East,West] 
         Halls = 'North', 'South', 'East', 'West'
@@ -171,21 +170,19 @@ def BarChartHalls(Day, DateRange,CollectDataDay):
         
 def BarChartCourse(Day, DateRange, CollectDataDay):
     
-    if Day == CollectDataDay:
+    if Day == CollectDataDay and s.PlotOrNot[1]== 'TRUE':
         
         Course = 'STEM', 'ARTS'
-        
-        SIRinputChoice = input('input S,I,R for SIR vals in y axis for courses plot:')
 
-        if SIRinputChoice == 'S':
+        if s.Sir[1] == 'S':
             yAxisName = "Susceptible"
-        elif SIRinputChoice == 'I':
+        elif s.Sir[1] == 'I':
             yAxisName = "Infected"
         else:
            yAxisName = "Recovered"
         
-        Stem = len(SIRinfoFilter(SIRinputChoice, None, None, None, 'STEM', Day, Day))
-        Arts = len(SIRinfoFilter(SIRinputChoice, None, None, None, 'ARTS', Day, Day))
+        Stem = len(SIRinfoFilter(s.Sir[1], None, None, None, 'STEM', Day, Day))
+        Arts = len(SIRinfoFilter(s.Sir[1], None, None, None, 'ARTS', Day, Day))
         
         SIR = [Stem, Arts]
         
@@ -197,23 +194,21 @@ def BarChartCourse(Day, DateRange, CollectDataDay):
         
 def BarChartCountries(Day, DateRange,CollectDataDay):
     
-    if Day == CollectDataDay:
+    if Day == CollectDataDay and s.PlotOrNot[2]== 'TRUE':
         
         countries = 'China' , 'US' , 'UK' , 'EU'
 
-        SIRinputChoice = input('input S,I,R for SIR vals in y axis for countries plot:')
-        
-        if SIRinputChoice == 'S':
+        if s.Sir[2] == 'S':
             yAxisName = "Susceptible"
-        elif SIRinputChoice == 'I':
+        elif s.Sir[2] == 'I':
             yAxisName = "Infected"
         else:
            yAxisName = "Recovered"
         
-        china = len(SIRinfoFilter(SIRinputChoice, 'China', None, None, None, Day,Day))
-        us = len(SIRinfoFilter(SIRinputChoice, 'US', None, None, None, Day,Day))
-        uk = len(SIRinfoFilter(SIRinputChoice, 'UK', None, None, None, Day,Day))
-        eu = len(SIRinfoFilter(SIRinputChoice, 'EU', None, None, None, Day,Day))
+        china = len(SIRinfoFilter(s.Sir[2], 'China', None, None, None, Day,Day))
+        us = len(SIRinfoFilter(s.Sir[2], 'US', None, None, None, Day,Day))
+        uk = len(SIRinfoFilter(s.Sir[2], 'UK', None, None, None, Day,Day))
+        eu = len(SIRinfoFilter(s.Sir[2], 'EU', None, None, None, Day,Day))
         
         SIR = [china,us,uk,eu]
     
@@ -245,31 +240,18 @@ def MainTimeSeriesPlot(SIRSeries):
 
             
     # Plotting the time series for certain user commands
-    SIRtimeseries = input('what would you like to see 1 var 2 var or 3 var against one another: ')
-
-    if SIRtimeseries == '1':        
-        q = input('which one would you like to see (S,I,R): ')
-        SIRchoice(q)
-    elif SIRtimeseries == '2':
-        q = input('which one would you like to see (S,I,R): ')
-        if q == 'S':
-            SIRSeries['S'].plot()
-            SIRchoice(q)
-        elif q == 'I':
-            SIRSeries['I'].plot()
-            q = input('which other one would you like to see (S,I,R): ')
-            SIRchoice(q)
-        elif q == 'R':
-            SIRSeries['R'].plot()
-            q = input('which other one would you like to see (S,I,R): ')
-            SIRchoice(q)
-    else:       
-        SIRSeries.plot()  
-        plt.title('Infection Data Time Series Plot')
-        plt.ylabel('Proportion of population')
-        
+    SIRtimeseriesOptions = s.Sir[3].split()
+    for SIR in SIRtimeseriesOptions:
+        if SIR == ' ':
+            Break
+        SIRSeries[SIR].plot()
+    plt.title('Infection Data Time Series Plot')
+    plt.ylabel('Proportion of population') 
+    plt.show
     plt.show()
-    
+
+
+def SaveMainDataframeOfAttributes():
     # Creates an excel file of all the attributes of each person at the end of the simulation 
     df = (CreateDataFrame())
     MainData = pd.ExcelWriter('MainSpreadsheet.xlsx')
