@@ -1,5 +1,5 @@
 Plot,Plot (TRUE/FALSE,Day,SIR
 Halls,TRUE,3,S
 Course,TRUE,40,I
-Country,FALSE,79,R
-Main,TRUE,100,"S,I"
+Country,TRUE,79,R
+Main,TRUE,,"S,I,R"

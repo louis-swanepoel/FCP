@@ -240,14 +240,13 @@ def MainTimeSeriesPlot(SIRSeries):
 
             
     # Plotting the time series for certain user commands
-    SIRtimeseriesOptions = s.Sir[3].split()
+    SIRtimeseriesOptions = s.Sir[3].split(',')
     for SIR in SIRtimeseriesOptions:
         if SIR == ' ':
             Break
         SIRSeries[SIR].plot()
     plt.title('Infection Data Time Series Plot')
     plt.ylabel('Proportion of population') 
-    plt.show
     plt.show()
 
 

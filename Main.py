@@ -31,13 +31,17 @@ S = []
 I = []
 R = []
 
+collectionDayHalls = int(s.Day[0])
+collectionDayCountries = int(s.Day[2])
+collectionDayCourse = int(s.Day[1])
+
 # Going through each days until now 
 for Day in range(0,len(DateRange)):
     
     # Data collection functions 
-    m.BarChartHalls(Day, DateRange, s.Day[0])
-    m.BarChartCountries(Day, DateRange,s.Day[2])
-    m.BarChartCourse(Day, DateRange, s.Day[1])
+    m.BarChartHalls(Day, DateRange, collectionDayHalls)
+    m.BarChartCountries(Day, DateRange,collectionDayCountries)
+    m.BarChartCourse(Day, DateRange, collectionDayCourse)
     # Holidays only add the data and do not change the infection numbers
     if Day in range (30,37):
         
