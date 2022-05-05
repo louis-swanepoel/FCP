@@ -7,7 +7,7 @@ Created on Tue Mar 29 18:58:23 2022
 """
 import pandas as pd
 from datetime import date as d 
-import assignments as s
+import Assignments as s
 import argparse as ap
 import Metrics as m
 import Functions as f
