@@ -8,7 +8,7 @@ Created on Wed Mar 23 13:03:36 2022
 # import names as nm
 import pandas as pd 
 import random as r
-import assignments as s
+import Assignments as s
 
 
 # Function to create dataframe of students information  -- returns dataframe of all the students attributes 

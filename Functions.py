@@ -7,7 +7,7 @@ Created on Wed Apr  6 13:46:01 2022
 
 import pandas as pd
 from datetime import date as d 
-import assignments as s
+import Assignments as s
 import Metrics as m
 import random as r
 import numpy as np
@@ -68,9 +68,8 @@ def infected(Day , DateRange,S,I,R):
                 s.StudentObjects[StudentNumber].SIR == 'R'
              
 def WDSocialNum(Day):
-    STEM = 2
-    ARTS = 1
-    Course = [STEM, ARTS]
+    STEM = 2 # adds 3 people to STEM students
+    ARTS = 1 # add 2 people to ARTS students
     Library = 2 # adds 2 people
     Home = 0 # adds 0 people
     Coffeeshop = 2 # adds 2 people
@@ -80,9 +79,9 @@ def WDSocialNum(Day):
     Hobbies = [Exercise, Friends, Home] # activities/hobbies list 
     for StudentNumber in range(s.PopulationSize):    
         if s.StudentObjects[StudentNumber].Course == 'STEM':
-            s.StudentObjects[StudentNumber].Social = STEM + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2])
+            s.StudentObjects[StudentNumber].Social = STEM + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) #builds a daily social value
         else:
-            s.StudentObjects[StudentNumber].Social = ARTS + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2])  
+            s.StudentObjects[StudentNumber].Social = ARTS + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) #builds a daily social value 
                       
         
             
