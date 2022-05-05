@@ -28,6 +28,8 @@ Then add the command 'python Main.py' for the code to begin and initial prompts 
 
 The code is simple for the user, and only requires running the main.py file, though all files in the repository must be downloaded into the same directory.
 
+In order for the code to work, the user must input their chosen plots and dates for which they want to see information for. This can all be found and edited within the GraphSelection.csv file. For the
+
 Once ran, the user will be asked when they want the simulation to end, which extends up to the current day, today.
 
 The user will then be asked whether they want to collect any other data, which will lead to the courses, nationality and halls plots being presented. Otherwise, only the SIR model will be presented.
