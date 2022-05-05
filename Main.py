@@ -7,13 +7,14 @@ Created on Tue Mar 29 18:58:23 2022
 """
 import pandas as pd
 from datetime import date as d 
-import Assignments as s
+import assignments as s
 import argparse as ap
 import Metrics as m
 import Functions as f
 import matplotlib.pyplot as plt
 import plotly.express as px
 import random as r
+import numpy as np
 
 # Todays Date 
 Today = d.today()
@@ -101,15 +102,29 @@ for Day in range(0,len(DateRange)):
             f.infected( Day , DateRange,S,I,R)           
             continue
         
-        # Weekends add an extra 2 people to everyones social number
+        # Weekends adds extra people to everyones social number
         elif 6<= Day%7 <=7:       
             m.CollectSIRdata(S,I,R)       
             for StudentNumber in range(s.PopulationSize):            
-                s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) +2                  
-            f.infected( Day , DateRange,S,I,R)         
-            for StudentNumber in range(s.PopulationSize):
-                s.StudentObjects[StudentNumber].Social = (s.StudentObjects[StudentNumber].Social) -2              
-            continue   
+                Library = 2 # adds 2 people
+                Home = 0 # adds 0 people
+                Coffeeshop = 2 # adds 2 people
+                Exercise = 1 # adds 1 person
+                Friends = 3 #adds 3 people
+                Clubs = 4 # adds 4 people
+                Restaurants = 2 # adds 2 people
+                Parties = 4 # adds 4 people
+                StudyTime = [Library, Home, Coffeeshop] # places to study list
+                Hobbies = [Exercise, Friends, Home] # activities/hobbies list
+                Nightlife = [Clubs, Restaurants, Parties, Home] # nightlife places list for weekends
+                WStudyTime = [True, False] # WeekEnd StudyTime
+                ChoiceWS = np.random.choice(WStudyTime, p=[0.7,0.3]) # A weighted assumed choice whether someone studies on the weekend (70% YES/ 30% NO)
+                if ChoiceWS == True: 
+                    s.StudentObjects[StudentNumber].Social = np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) + np.random.choice(Nightlife, p=[0.25,0.2,0.4,0.15]) # assigns each person a social value
+                else:
+                    s.StudentObjects[StudentNumber].Social = np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) + np.random.choice(Nightlife, p=[0.25,0.2,0.4,0.15]) #if someone does not study over the weekend then 2x hobbies higher social value
+                                        
+            f.infected( Day , DateRange,S,I,R) 
         
 # Formats the SIR vals for plotting into a time series 
 SIRSeries['S'] = S
