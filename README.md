@@ -36,7 +36,7 @@ The outcome of the code would look something like this: ![Image](https://github.
 
 ## Results of the code: 
 
-The code produces several plots with the users chosen inputs to represent the susceptible, infected and recovered populations within the greater student population, as well as breaking this population up into different subgroups. These plots can be moused over to show the exact figures on the x,y,t axis. Each time they pop up they can be saved.
+The code produces several plots with the users chosen inputs to represent the susceptible, infected and recovered populations within the greater student population, as well as breaking this population up into different subgroups. These plots can be moused over to show the exact figures on the x,y,t axis. Each time they are generated they can be saved.
 
 ## Credits:
 
