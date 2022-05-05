@@ -67,23 +67,6 @@ def infected(Day , DateRange,S,I,R):
             else:
                 s.StudentObjects[StudentNumber].SIR == 'R'
              
-def WDSocialNum(Day):
-    STEM = 2 # adds 3 people to STEM students
-    ARTS = 1 # add 2 people to ARTS students
-    Library = 2 # adds 2 people
-    Home = 0 # adds 0 people
-    Coffeeshop = 2 # adds 2 people
-    Exercise = 1 # adds 1 person
-    Friends = 2 # adds 2 people
-    StudyTime = [Library, Home, Coffeeshop] # places to study list
-    Hobbies = [Exercise, Friends, Home] # activities/hobbies list 
-    for StudentNumber in range(s.PopulationSize):    
-        if s.StudentObjects[StudentNumber].Course == 'STEM':
-            s.StudentObjects[StudentNumber].Social = STEM + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) #builds a daily social value
-        else:
-            s.StudentObjects[StudentNumber].Social = ARTS + np.random.choice(StudyTime, p=[0.5, 0.2, 0.3]) + np.random.choice(Hobbies, p=[0.4, 0.4, 0.2]) #builds a daily social value 
-                      
-        
             
         
 
