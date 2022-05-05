@@ -28,15 +28,7 @@ Then add the command 'python Main.py' for the code to begin and initial prompts 
 
 The code is simple for the user, and only requires running the main.py file, though all files in the repository must be downloaded into the same directory.
 
-In order for the code to work, the user must input their chosen plots and dates for which they want to see information for. This can all be found and edited within the GraphSelection.csv file. For the
-
-Once ran, the user will be asked when they want the simulation to end, which extends up to the current day, today.
-
-The user will then be asked whether they want to collect any other data, which will lead to the courses, nationality and halls plots being presented. Otherwise, only the SIR model will be presented.
-
-The date of this data collection is asked, and then further prompts specifying the type of data to be represented are asked, the choice between S, I and R. 
-
-Finally, the user will be asked whether they want to see the representation of 1, 2 or 3 variables on the SIR graph. 
+In order for the code to work, the user must input their chosen plots and dates for which they want to see information for. This can all be found and edited within the GraphSelection.csv file. For the 'Main' plot, the user can chose between 3 variables, S, I and R, which must be seperated with a comma for multiple variable demonstration on the plot E.G 'S,R'. For the other plots, only one varaible can be demonstrated at a time, though the dates for these plots can be different. 
 
 The outcome of the code would look something like this: ![Image](https://github.com/louis-swanepoel/FCP/blob/main/Example%20Screenshot.png)
 
