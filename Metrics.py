@@ -251,6 +251,7 @@ def MainTimeSeriesPlot(SIRSeries):
     # Plotting and showing the information for this graph
     plt.title('Infection Data Time Series Plot')
     plt.ylabel('Proportion of population') 
+    plt.legend()
     plt.show()
 
 
