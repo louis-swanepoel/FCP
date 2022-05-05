@@ -129,7 +129,8 @@ for Day in range(0,len(DateRange)):
 # Formats the SIR vals for plotting into a time series 
 SIRSeries['S'] = S
 SIRSeries['I'] = I           
-SIRSeries['R'] = R
+SIRSeries['R'] = R#!/usr/bin/env python
+
 SIRSeries.set_index('Date',inplace=True)
 
 # Function that plots the main SIR time series for the whole simulation

@@ -222,10 +222,6 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         plt.xlabel('Nationality')
         plt.ylabel(yAxisName)
         plt.show()
-        df = (CreateDataFrame())
-        MainData = pd.ExcelWriter('MainSpreadsheet.xlsx')
-        df.to_excel(MainData)
-        MainData.save()
         
         
 def MainTimeSeriesPlot(SIRSeries):
@@ -271,22 +267,13 @@ def MainTimeSeriesPlot(SIRSeries):
         SIRSeries.plot()  
         plt.title('Infection Data Time Series Plot')
         plt.ylabel('Proportion of population')
-    plt.show   
+        
+    plt.show()
+    df = (CreateDataFrame())
+    MainData = pd.ExcelWriter('MainSpreadsheet.xlsx')
+    df.to_excel(MainData)
+    MainData.save()
+    
+  
 
         
-    ###### TESTING
-
-
-# StudentInfoDataFrame = CreateDataFrame()
-# SIRdata = CollectSIRdata
-
-# # Pull certain people from the data frame
-# StudentInfoDataFrame.iloc[1]
-
-# # Sort the dataframe by social number in descending order 
-# StudentInfoDataFrame.groupby('StudentNumber')['Social'].max().reset_index().sort_values(['Social'], ascending=False)
-
-
-
-# print(StudentInfoDataFrame)
-# print(CollectSIRdata())
