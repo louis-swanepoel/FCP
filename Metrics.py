@@ -162,6 +162,7 @@ def BarChartHalls(Day, DateRange,CollectDataDay):
         SIR = [North,South,East,West] 
         Halls = 'North', 'South', 'East', 'West'
         
+        # Plotting and showing the information for this graph
         plt.bar(Halls,SIR, color=['red', 'green', 'blue', 'cyan'])
         plt.title('Halls infection data:'+ str(DateRange[Day]))
         plt.xlabel('Halls')
@@ -185,7 +186,8 @@ def BarChartCourse(Day, DateRange, CollectDataDay):
         Arts = len(SIRinfoFilter(s.Sir[1], None, None, None, 'ARTS', Day, Day))
         
         SIR = [Stem, Arts]
-        
+
+        # Plotting and showing the information for this graph
         plt.bar(Course,SIR,color=['red', 'green'])
         plt.title('Course infection data:'+ str(DateRange[Day]))
         plt.xlabel('Course')
@@ -211,7 +213,8 @@ def BarChartCountries(Day, DateRange,CollectDataDay):
         eu = len(SIRinfoFilter(s.Sir[2], 'EU', None, None, None, Day,Day))
         
         SIR = [china,us,uk,eu]
-    
+
+        # Plotting and showing the information for this graph
         plt.bar(countries,SIR, color=['red', 'cyan'])
         plt.title('Nationality infection data:'+ str(DateRange[Day]))
         plt.xlabel('Nationality')
@@ -245,6 +248,9 @@ def MainTimeSeriesPlot(SIRSeries):
         if SIR == ' ':
             Break
         SIRSeries[SIR].plot()
+
+    # Plotting and showing the information for this graph
+    plt.figure()
     plt.title('Infection Data Time Series Plot')
     plt.ylabel('Proportion of population') 
     plt.show()
