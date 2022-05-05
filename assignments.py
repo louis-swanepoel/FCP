@@ -5,8 +5,7 @@ Created on Wed Mar 23 13:03:36 2022
 
 @author: louisswanepoel
 """
-# import names as nm
-#from DictionaryMethod import Halls
+
 from random import choices , randint , choice
 import numpy as np
 import csv
@@ -27,6 +26,23 @@ for entry in Rows[1:]:
     NationWeight.append(float(entry[1]))
     InfWeight.append(float(entry[2]))
 InfDict = {j:InfWeight[i] for i , j in enumerate(Nations)} 
+
+# Graphs wanted by the user 
+Document2 = open('GraphSelection.csv') 
+DocumentContents2 = csv.reader(Document2)  
+Rows2 = []
+for row in DocumentContents2:
+    Rows2.append(row)
+Plot ,PlotOrNot, Day , Sir = [] , [] , [] , []
+for entry in Rows2[1:]:
+    if entry == []:
+        break
+
+    Plot.append((entry[0]))
+    PlotOrNot.append((entry[1]))
+    Day.append((entry[2]))
+    Sir.append((entry[3]))
+
 
 ###Initial conditions
 
