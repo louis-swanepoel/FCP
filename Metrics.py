@@ -240,8 +240,7 @@ def MainTimeSeriesPlot(SIRSeries):
             SIRSeries['R'].plot()
             plt.title('Infection Data Time Series Plot')
             plt.ylabel('Proportion of population')
-
-            
+      
     # Plotting the time series for certain user commands
     SIRtimeseriesOptions = s.Sir[3].split(',')
     for SIR in SIRtimeseriesOptions:
@@ -250,7 +249,6 @@ def MainTimeSeriesPlot(SIRSeries):
         SIRSeries[SIR].plot()
 
     # Plotting and showing the information for this graph
-    plt.figure()
     plt.title('Infection Data Time Series Plot')
     plt.ylabel('Proportion of population') 
     plt.show()
