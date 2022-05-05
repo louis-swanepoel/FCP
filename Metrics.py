@@ -269,6 +269,8 @@ def MainTimeSeriesPlot(SIRSeries):
         plt.ylabel('Proportion of population')
         
     plt.show()
+    
+    # Creates an excel file of all the attributes of each person at the end of the simulation 
     df = (CreateDataFrame())
     MainData = pd.ExcelWriter('MainSpreadsheet.xlsx')
     df.to_excel(MainData)
